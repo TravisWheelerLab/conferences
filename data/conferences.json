@@ -10,7 +10,7 @@
       "end": "2026-07-03",
       "dates_display": "June 30 - July 3, 2026",
       "paper_deadline": "passed",
-      "poster_deadline": "TBD"
+      "poster_deadline": "May 20, 2026 (late posters, passed)"
     },
     {
       "name": "ICML 2026",
@@ -93,6 +93,16 @@
       "poster_deadline": "TBD"
     },
     {
+      "name": "InCoB/ISCB-APAC 2026",
+      "url": "https://incob.apbionet.org/incob2026/",
+      "location": "Penang, Malaysia",
+      "start": "2026-09-14",
+      "end": "2026-09-17",
+      "dates_display": "September 14 - 17, 2026",
+      "paper_deadline": "May 17, 2026 (passed)",
+      "poster_deadline": "July 20, 2026 (abstracts)"
+    },
+    {
       "name": "CSHL Transposable Elements 2026",
       "url": "https://meetings.cshl.edu/meetings.aspx?meet=TRANSPOSE",
       "location": "Cold Spring Harbor, New York, USA",
@@ -130,7 +140,7 @@
       "end": "2026-10-29",
       "dates_display": "October 24 - 29, 2026",
       "paper_deadline": "May 25, 2026 (ARR, passed)",
-      "poster_deadline": "TBD"
+      "poster_deadline": "August 2, 2026 (ARR commitment deadline)"
     },
     {
       "name": "MLCB 2026",
@@ -219,8 +229,8 @@
       "start": "2027-03-15",
       "end": "2027-03-18",
       "dates_display": "March 15 - 18, 2027",
-      "paper_deadline": "N/A",
-      "poster_deadline": "TBD"
+      "paper_deadline": "November 17, 2026 (short talk abstracts)",
+      "poster_deadline": "February 22, 2027 (poster abstracts)"
     },
     {
       "name": "ICLR 2027",

@@ -12,5 +12,3 @@
 #   at https://claude.ai/code/routines and click "Run now" after adding URLs.
 
 # --- add URLs below this line ---
-https://qfo2026.unil.ch/
-https://eccb2026.org/
