@@ -60,6 +60,8 @@ td a:hover { text-decoration: underline; }
 
 .soon { color: var(--soon); font-weight: 600; }
 
+.passed { text-decoration: line-through; color: var(--muted); }
+
 .empty { color: var(--muted); font-style: italic; }
 
 details { margin-top: 1rem; }

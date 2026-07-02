@@ -41,6 +41,43 @@ function daysUntil(conf, today) {
   return Math.round((parseISO(conf.start) - today) / 86400000);
 }
 
+// Renders a deadline cell. When the deadline has passed, the text is struck
+// through (with the "(passed)" annotation removed) rather than labeled "passed".
+// A deadline counts as passed if the data marks it "passed" or if a parseable
+// date in the string is before today.
+function deadlineCell(value) {
+  const td = el("td");
+  const raw = (value || "TBD").trim();
+  const lower = raw.toLowerCase();
+
+  if (lower === "tbd" || lower === "n/a" || raw === "") {
+    td.textContent = raw || "TBD";
+    return td;
+  }
+
+  // Drop the "passed" marker, keeping any other note (e.g. "abstracts, passed").
+  let text = raw
+    .replace(/\s*\(([^)]*\bpassed\b[^)]*)\)/i, (_m, inner) => {
+      const rest = inner.replace(/\s*,?\s*passed\s*/i, "").trim();
+      return rest ? ` (${rest})` : "";
+    })
+    .replace(/\s*,?\s*passed\s*$/i, "")
+    .trim();
+  if (text === "") text = raw; // was a bare "passed" with no date
+
+  const parsed = Date.parse(text);
+  const isPast =
+    /\bpassed\b/i.test(raw) ||
+    (!isNaN(parsed) && parsed < startOfToday().getTime());
+
+  if (isPast) {
+    td.appendChild(el("span", { text, className: "passed" }));
+  } else {
+    td.textContent = text;
+  }
+  return td;
+}
+
 function renderUpcoming(list, today) {
   const tbody = document.querySelector("#upcoming-table tbody");
   const emptyMsg = document.getElementById("empty-msg");
@@ -64,8 +101,8 @@ function renderUpcoming(list, today) {
     }
     tr.appendChild(dates);
 
-    tr.appendChild(el("td", { text: conf.paper_deadline || "TBD" }));
-    tr.appendChild(el("td", { text: conf.poster_deadline || "TBD" }));
+    tr.appendChild(deadlineCell(conf.paper_deadline));
+    tr.appendChild(deadlineCell(conf.poster_deadline));
     tbody.appendChild(tr);
   }
 }
