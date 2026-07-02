@@ -1,0 +1,76 @@
+{
+  "updated": "2026-07-01",
+  "note": "Fields: name, url, location, start/end are ISO dates used for sorting and pruning; dates_display is the human-readable range. paper_deadline and poster_deadline are free text (a date, 'TBD', or 'passed').",
+  "conferences": [
+    {
+      "name": "ICML 2026",
+      "url": "https://icml.cc/Conferences/2026",
+      "location": "Seoul, South Korea",
+      "start": "2026-07-06",
+      "end": "2026-07-11",
+      "dates_display": "July 6 - 11, 2026",
+      "paper_deadline": "January 28, 2026 (passed)",
+      "poster_deadline": "TBD"
+    },
+    {
+      "name": "ECCB 2026",
+      "url": "https://easychair.org/cfp/ECCB2026",
+      "location": "Geneva, Switzerland",
+      "start": "2026-08-31",
+      "end": "2026-09-04",
+      "dates_display": "August 31 - September 4, 2026",
+      "paper_deadline": "TBD",
+      "poster_deadline": "TBD"
+    },
+    {
+      "name": "ASHG 2026",
+      "url": "https://ashgmeeting.ashg.org/",
+      "location": "Montreal, Quebec, Canada",
+      "start": "2026-10-20",
+      "end": "2026-10-24",
+      "dates_display": "October 20 - 24, 2026",
+      "paper_deadline": "TBD",
+      "poster_deadline": "TBD"
+    },
+    {
+      "name": "NeurIPS 2026",
+      "url": "https://neurips.cc/Conferences/2026",
+      "location": "Sydney, Australia",
+      "start": "2026-12-06",
+      "end": "2026-12-12",
+      "dates_display": "December 6 - 12, 2026",
+      "paper_deadline": "May 6, 2026 (passed)",
+      "poster_deadline": "TBD"
+    },
+    {
+      "name": "PSB 2027",
+      "url": "https://psb.stanford.edu/",
+      "location": "Big Island of Hawaii, USA",
+      "start": "2027-01-03",
+      "end": "2027-01-07",
+      "dates_display": "January 3 - 7, 2027",
+      "paper_deadline": "August 3, 2026",
+      "poster_deadline": "December 1, 2026 (abstract)"
+    },
+    {
+      "name": "PAG 34 (Plant & Animal Genome)",
+      "url": "https://intlpag.org/PAG/",
+      "location": "San Diego, California, USA",
+      "start": "2027-01-08",
+      "end": "2027-01-12",
+      "dates_display": "January 8 - 12, 2027",
+      "paper_deadline": "TBD",
+      "poster_deadline": "TBD"
+    },
+    {
+      "name": "ICLR 2027",
+      "url": "https://iclr.cc/Conferences/2026",
+      "location": "Brazil",
+      "start": "2027-04-24",
+      "end": "2027-04-28",
+      "dates_display": "April 24 - 28, 2027",
+      "paper_deadline": "September 24, 2026",
+      "poster_deadline": "TBD"
+    }
+  ]
+}

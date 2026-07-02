@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wheeler Lab — Upcoming Conferences</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Conferences &amp; Workshops</h1>
+    <p class="sub">
+      Upcoming meetings of interest to the Wheeler Lab &mdash; bioinformatics,
+      ML for biology, genomics, and protein structural modeling.
+    </p>
+    <p class="updated" id="updated"></p>
+  </header>
+
+  <main>
+    <section>
+      <h2>Upcoming</h2>
+      <table id="upcoming-table">
+        <thead>
+          <tr>
+            <th>Conference</th>
+            <th>Location</th>
+            <th>Dates</th>
+            <th>Paper deadline</th>
+            <th>Poster deadline</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p id="empty-msg" class="empty" hidden>No upcoming conferences on file.</p>
+    </section>
+
+    <section>
+      <details id="past-details">
+        <summary>Past conferences (<span id="past-count">0</span>)</summary>
+        <table id="past-table">
+          <thead>
+            <tr>
+              <th>Conference</th>
+              <th>Location</th>
+              <th>Dates</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      Data lives in <code>data/conferences.json</code>. Passed conferences are
+      pruned automatically; new ones are added by a scheduled agent.
+    </p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
