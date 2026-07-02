@@ -28,6 +28,14 @@ structural modeling.
    `data/conferences.json` (de-duplicating on name), and commits directly. See
    `DISCOVERY_PROMPT.md` for the exact instructions it follows.
 
+## Adding a conference the easy way
+
+Paste the conference's URL (one per line) into **`add-conferences.txt`** and
+commit. On its next run the discovery agent visits each URL, extracts the name,
+dates, location, and deadlines, adds it to `data/conferences.json`, and removes
+the line. To process immediately instead of waiting for the schedule, open the
+routine at https://claude.ai/code/routines and click **Run now**.
+
 ## Editing by hand
 
 Add or correct an entry directly in `data/conferences.json` and commit. Keep

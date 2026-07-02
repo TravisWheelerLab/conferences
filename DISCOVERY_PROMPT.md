@@ -14,7 +14,23 @@ Do the following, then commit and push directly to `main`:
 
 1. Read `data/conferences.json`.
 
-2. **Re-verify every existing entry (do this every run — not just for new
+2. **Process the request queue in `add-conferences.txt` first.** Read that file
+   at the repo root. For each line that is not blank and does not start with
+   `#`, treat it as a URL:
+   - Fetch the page and extract the conference name, official URL, location,
+     `start`/`end` dates, and paper/poster deadlines.
+   - If it is already in `data/conferences.json` (match on name or URL,
+     case-insensitive) or its start date is already in the past, skip it.
+   - Otherwise add a properly formatted entry (verify dates against the page;
+     do not invent).
+   - **Remove every line you successfully handled** (added, or intentionally
+     skipped as a duplicate / past event) from `add-conferences.txt`.
+   - If you cannot extract reliable info from a URL, leave that line in the file
+     and append `  # could not verify YYYY-MM-DD` so a human can look.
+
+   Commit the edited `add-conferences.txt` together with `conferences.json`.
+
+3. **Re-verify every existing entry (do this every run — not just for new
    ones).** For each conference already in the file, check its official site and
    update anything that has changed: confirmed dates replacing estimates,
    newly announced paper/poster deadlines (`"TBD"` → a real date), corrected
@@ -22,30 +38,30 @@ Do the following, then commit and push directly to `main`:
    estimate wording once real dates are confirmed. This keeps previously
    captured conferences accurate as organizers firm up details.
 
-3. Run `python3 scripts/prune.py` to drop any conferences that have already
+4. Run `python3 scripts/prune.py` to drop any conferences that have already
    ended.
 
-4. Use web search to find conferences and workshops in the topics above whose
+5. Use web search to find conferences and workshops in the topics above whose
    **start date is within the next 12 months** and that are **not already in the
    file**.
 
-5. For each new or updated conference, use this shape:
+6. For each new or updated conference, use this shape:
    - `name`, `url` (official site), `location`
    - `start` and `end` as `YYYY-MM-DD` (best available; if only a month is
      known, use a reasonable day and note it in `dates_display`)
    - `dates_display` — human-readable range matching start/end
    - `paper_deadline` and `poster_deadline` — a date, `"TBD"`, or `"passed"`
 
-6. De-duplicate on `name` (case-insensitive). **Do not invent dates** — if you
+7. De-duplicate on `name` (case-insensitive). **Do not invent dates** — if you
    can't verify a real date, skip the conference (or leave the existing value
    untouched). It is better to omit an unverifiable conference than to publish a
    wrong date.
 
-7. Set the top-level `updated` field to today's date. Keep the file valid JSON,
+8. Set the top-level `updated` field to today's date. Keep the file valid JSON,
    2-space indented, with a trailing newline. Verify it parses:
    `python3 -c "import json; json.load(open('data/conferences.json'))"`.
 
-8. Commit with a message summarizing what you added / updated / removed and push
+9. Commit with a message summarizing what you added / updated / removed and push
    to `main`. If nothing changed, do not commit.
 
 ## Watchlist — series the lab tracks

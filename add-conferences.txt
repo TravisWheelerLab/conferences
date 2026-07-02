@@ -1,0 +1,14 @@
+# Add conferences here — one URL per line.
+#
+# The scheduled discovery agent reads this file on every run, visits each URL,
+# extracts the conference name, dates, location, and paper/poster deadlines, and
+# adds an entry to data/conferences.json (if it's not already there and its start
+# date is within the next ~12 months). URLs it successfully handles are removed
+# from this file; any it can't verify are left here with a note so you can check.
+#
+# - Lines starting with "#" and blank lines are ignored.
+# - Paste the official conference site if you can; a program/CFP page also works.
+# - To process right away instead of waiting for the schedule, open the routine
+#   at https://claude.ai/code/routines and click "Run now" after adding URLs.
+
+# --- add URLs below this line ---
