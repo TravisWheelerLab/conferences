@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-01",
+  "updated": "2026-07-02",
   "note": "Fields: name, url, location, start/end are ISO dates used for sorting and pruning; dates_display is the human-readable range. paper_deadline and poster_deadline are free text (a date, 'TBD', or 'passed').",
   "conferences": [
     {
@@ -20,7 +20,7 @@
       "end": "2026-07-11",
       "dates_display": "July 6 - 11, 2026",
       "paper_deadline": "January 28, 2026 (passed)",
-      "poster_deadline": "TBD"
+      "poster_deadline": "passed"
     },
     {
       "name": "ISMB 2026",
@@ -29,8 +29,18 @@
       "start": "2026-07-12",
       "end": "2026-07-16",
       "dates_display": "July 12 - 16, 2026",
-      "paper_deadline": "April 2, 2026 (passed)",
-      "poster_deadline": "TBD"
+      "paper_deadline": "April 9, 2026 (passed)",
+      "poster_deadline": "May 7, 2026 (passed)"
+    },
+    {
+      "name": "FASEB Genetic Recombination & Genome Rearrangements 2026",
+      "url": "https://events.faseb.org/event/Genetic-Recombination/summary",
+      "location": "Scottsdale, Arizona, USA",
+      "start": "2026-07-12",
+      "end": "2026-07-17",
+      "dates_display": "July 12 - 17, 2026",
+      "paper_deadline": "N/A",
+      "poster_deadline": "passed"
     },
     {
       "name": "Protein Society 40th Annual Symposium (PS40)",
@@ -40,17 +50,37 @@
       "end": "2026-07-22",
       "dates_display": "July 19 - 22, 2026",
       "paper_deadline": "N/A",
+      "poster_deadline": "April 30, 2026 (passed)"
+    },
+    {
+      "name": "KR 2026",
+      "url": "https://kr.org/KR2026/",
+      "location": "Lisbon, Portugal",
+      "start": "2026-07-20",
+      "end": "2026-07-23",
+      "dates_display": "July 20 - 23, 2026",
+      "paper_deadline": "February 13, 2026 (passed)",
       "poster_deadline": "TBD"
     },
     {
+      "name": "Quest for Orthologs 9",
+      "url": "https://qfo2026.unil.ch/",
+      "location": "Lausanne, Switzerland",
+      "start": "2026-08-29",
+      "end": "2026-08-30",
+      "dates_display": "August 29 - 30, 2026",
+      "paper_deadline": "N/A",
+      "poster_deadline": "May 15, 2026 (passed)"
+    },
+    {
       "name": "ECCB 2026",
-      "url": "https://easychair.org/cfp/ECCB2026",
+      "url": "https://eccb2026.org/",
       "location": "Geneva, Switzerland",
       "start": "2026-08-31",
       "end": "2026-09-04",
       "dates_display": "August 31 - September 4, 2026",
-      "paper_deadline": "TBD",
-      "poster_deadline": "TBD"
+      "paper_deadline": "March 5, 2026 (passed)",
+      "poster_deadline": "April 30, 2026 (passed)"
     },
     {
       "name": "WABI 2026",
@@ -59,7 +89,17 @@
       "start": "2026-08-31",
       "end": "2026-09-02",
       "dates_display": "August 31 - September 2, 2026",
-      "paper_deadline": "TBD",
+      "paper_deadline": "May 14, 2026 (passed)",
+      "poster_deadline": "TBD"
+    },
+    {
+      "name": "CSHL Transposable Elements 2026",
+      "url": "https://meetings.cshl.edu/meetings.aspx?meet=TRANSPOSE",
+      "location": "Cold Spring Harbor, New York, USA",
+      "start": "2026-09-29",
+      "end": "2026-10-03",
+      "dates_display": "September 29 - October 3, 2026",
+      "paper_deadline": "N/A",
       "poster_deadline": "TBD"
     },
     {
@@ -69,7 +109,17 @@
       "start": "2026-10-20",
       "end": "2026-10-24",
       "dates_display": "October 20 - 24, 2026",
-      "paper_deadline": "TBD",
+      "paper_deadline": "N/A",
+      "poster_deadline": "May 18, 2026 (passed)"
+    },
+    {
+      "name": "APBC 2026",
+      "url": "https://www.apbc2026.com/",
+      "location": "Hsinchu, Taiwan",
+      "start": "2026-10-21",
+      "end": "2026-10-24",
+      "dates_display": "October 21 - 24, 2026",
+      "paper_deadline": "July 10, 2026",
       "poster_deadline": "TBD"
     },
     {
@@ -97,8 +147,8 @@
       "url": "https://www3.cs.stonybrook.edu/~bibm2026/home.html",
       "location": "Dallas, Texas, USA",
       "start": "2026-12-01",
-      "end": "2026-12-06",
-      "dates_display": "Early December 2026 (dates TBC)",
+      "end": "2026-12-04",
+      "dates_display": "December 1 - 4, 2026",
       "paper_deadline": "July 5, 2026",
       "poster_deadline": "TBD"
     },
@@ -143,6 +193,16 @@
       "poster_deadline": "TBD"
     },
     {
+      "name": "CSHL Network Biology 2027",
+      "url": "https://meetings.cshl.edu/meetings.aspx?meet=NETWORK",
+      "location": "Cold Spring Harbor, New York, USA",
+      "start": "2027-03-09",
+      "end": "2027-03-13",
+      "dates_display": "March 9 - 13, 2027",
+      "paper_deadline": "N/A",
+      "poster_deadline": "TBD"
+    },
+    {
       "name": "COSYNE 2027",
       "url": "https://www.cosyne.org/",
       "location": "Montreal, Canada",
@@ -153,9 +213,19 @@
       "poster_deadline": "TBD"
     },
     {
+      "name": "Keystone Symposia: Transposable Elements 2027",
+      "url": "https://www.keystonesymposia.org/conferences/conference-listing/meeting/pricing/c22027",
+      "location": "Breckenridge, Colorado, USA",
+      "start": "2027-03-15",
+      "end": "2027-03-18",
+      "dates_display": "March 15 - 18, 2027",
+      "paper_deadline": "N/A",
+      "poster_deadline": "TBD"
+    },
+    {
       "name": "ICLR 2027",
-      "url": "https://iclr.cc/Conferences/2026",
-      "location": "Brazil",
+      "url": "https://iclr.cc/Conferences/FutureMeetings",
+      "location": "West Coast, North America (TBD)",
       "start": "2027-04-24",
       "end": "2027-04-28",
       "dates_display": "April 24 - 28, 2027",

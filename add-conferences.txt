@@ -13,4 +13,3 @@
 
 # --- add URLs below this line ---
 
-https://meetings.cshl.edu/meetings.aspx?meet=TRANSPOSE
