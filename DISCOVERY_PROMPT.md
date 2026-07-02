@@ -52,6 +52,26 @@ Do the following, then commit and push directly to `main`:
    - `dates_display` — human-readable range matching start/end
    - `paper_deadline` and `poster_deadline` — a date, `"TBD"`, or `"passed"`
 
+   **Work hard to find the submission deadlines — this is the most valuable
+   field and must not be left `"TBD"` when a date exists.** For every
+   conference:
+   - Do not stop at the homepage. Open the site's **"Key Dates" / "Important
+     Dates" / "Call for Papers" / "Submission" / "Abstracts"** page — that is
+     where deadlines live. Also try a targeted search like
+     `"<conference> <year> call for papers deadline"` or
+     `"<conference> <year> abstract submission deadline"`, and check aggregators
+     (wikicfp.com, the venue's OpenReview page, ISCB/ISMB key-dates pages).
+   - Distinguish **paper/proceedings** deadlines from **abstract** deadlines.
+     For abstract-only meetings (ASHG, PAG, BPS, COSYNE, Keystone/FASEB/CSHL,
+     society meetings), put the main **abstract** deadline in `paper_deadline`
+     and any separate poster/late-breaking deadline in `poster_deadline`.
+     Annotate clearly, e.g. `"May 18, 2026 (abstracts, passed)"`.
+   - If a deadline has already passed, still record it with `"(passed)"` rather
+     than `"TBD"`, and note any **late-breaking** window in `poster_deadline`.
+   - Only use `"TBD"` when the organizers genuinely have not announced the date
+     yet (e.g. next year's edition). When you do, it means "not yet published,"
+     not "didn't look."
+
 7. De-duplicate on `name` (case-insensitive). **Do not invent dates** — if you
    can't verify a real date, skip the conference (or leave the existing value
    untouched). It is better to omit an unverifiable conference than to publish a
