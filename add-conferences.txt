@@ -12,3 +12,5 @@
 #   at https://claude.ai/code/routines and click "Run now" after adding URLs.
 
 # --- add URLs below this line ---
+
+https://meetings.cshl.edu/meetings.aspx?meet=TRANSPOSE
