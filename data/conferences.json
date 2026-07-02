@@ -3,6 +3,16 @@
   "note": "Fields: name, url, location, start/end are ISO dates used for sorting and pruning; dates_display is the human-readable range. paper_deadline and poster_deadline are free text (a date, 'TBD', or 'passed').",
   "conferences": [
     {
+      "name": "ACM-BCB 2026",
+      "url": "https://acm-bcb.org/",
+      "location": "Rende (Calabria), Italy",
+      "start": "2026-06-30",
+      "end": "2026-07-03",
+      "dates_display": "June 30 - July 3, 2026",
+      "paper_deadline": "passed",
+      "poster_deadline": "TBD"
+    },
+    {
       "name": "ICML 2026",
       "url": "https://icml.cc/Conferences/2026",
       "location": "Seoul, South Korea",
@@ -10,6 +20,26 @@
       "end": "2026-07-11",
       "dates_display": "July 6 - 11, 2026",
       "paper_deadline": "January 28, 2026 (passed)",
+      "poster_deadline": "TBD"
+    },
+    {
+      "name": "ISMB 2026",
+      "url": "https://www.iscb.org/ismb2026/home",
+      "location": "Washington, DC, USA",
+      "start": "2026-07-12",
+      "end": "2026-07-16",
+      "dates_display": "July 12 - 16, 2026",
+      "paper_deadline": "April 2, 2026 (passed)",
+      "poster_deadline": "TBD"
+    },
+    {
+      "name": "Protein Society 40th Annual Symposium (PS40)",
+      "url": "https://www.proteinsociety.org/annual-symposium",
+      "location": "Boston, Massachusetts, USA",
+      "start": "2026-07-19",
+      "end": "2026-07-22",
+      "dates_display": "July 19 - 22, 2026",
+      "paper_deadline": "N/A",
       "poster_deadline": "TBD"
     },
     {
@@ -23,6 +53,16 @@
       "poster_deadline": "TBD"
     },
     {
+      "name": "WABI 2026",
+      "url": "https://algo-conference.org/2026/wabi/",
+      "location": "L'Aquila, Italy",
+      "start": "2026-08-31",
+      "end": "2026-09-02",
+      "dates_display": "August 31 - September 2, 2026",
+      "paper_deadline": "TBD",
+      "poster_deadline": "TBD"
+    },
+    {
       "name": "ASHG 2026",
       "url": "https://ashgmeeting.ashg.org/",
       "location": "Montreal, Quebec, Canada",
@@ -30,6 +70,36 @@
       "end": "2026-10-24",
       "dates_display": "October 20 - 24, 2026",
       "paper_deadline": "TBD",
+      "poster_deadline": "TBD"
+    },
+    {
+      "name": "EMNLP 2026",
+      "url": "https://2026.emnlp.org/",
+      "location": "Budapest, Hungary",
+      "start": "2026-10-24",
+      "end": "2026-10-29",
+      "dates_display": "October 24 - 29, 2026",
+      "paper_deadline": "May 25, 2026 (ARR, passed)",
+      "poster_deadline": "TBD"
+    },
+    {
+      "name": "MLCB 2026",
+      "url": "https://www.mlcb.org/",
+      "location": "New York Genome Center, NYC, USA",
+      "start": "2026-11-16",
+      "end": "2026-11-17",
+      "dates_display": "November 16 - 17, 2026",
+      "paper_deadline": "July 3, 2026",
+      "poster_deadline": "July 3, 2026"
+    },
+    {
+      "name": "IEEE BIBM 2026",
+      "url": "https://www3.cs.stonybrook.edu/~bibm2026/home.html",
+      "location": "Dallas, Texas, USA",
+      "start": "2026-12-01",
+      "end": "2026-12-06",
+      "dates_display": "Early December 2026 (dates TBC)",
+      "paper_deadline": "July 5, 2026",
       "poster_deadline": "TBD"
     },
     {
@@ -59,6 +129,26 @@
       "start": "2027-01-08",
       "end": "2027-01-12",
       "dates_display": "January 8 - 12, 2027",
+      "paper_deadline": "TBD",
+      "poster_deadline": "TBD"
+    },
+    {
+      "name": "BPS 2027 (Biophysical Society)",
+      "url": "https://www.biophysics.org/2027meeting",
+      "location": "Philadelphia, Pennsylvania, USA",
+      "start": "2027-02-20",
+      "end": "2027-02-24",
+      "dates_display": "February 20 - 24, 2027",
+      "paper_deadline": "TBD",
+      "poster_deadline": "TBD"
+    },
+    {
+      "name": "COSYNE 2027",
+      "url": "https://www.cosyne.org/",
+      "location": "Montreal, Canada",
+      "start": "2027-03-11",
+      "end": "2027-03-16",
+      "dates_display": "March 11 - 16, 2027",
       "paper_deadline": "TBD",
       "poster_deadline": "TBD"
     },
