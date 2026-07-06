@@ -1,17 +1,7 @@
 {
-  "updated": "2026-07-02",
+  "updated": "2026-07-06",
   "note": "Fields: name, url, location, start/end are ISO dates used for sorting and pruning; dates_display is the human-readable range. paper_deadline and poster_deadline are free text (a date, 'TBD', or 'passed').",
   "conferences": [
-    {
-      "name": "ACM-BCB 2026",
-      "url": "https://acm-bcb.org/",
-      "location": "Rende (Calabria), Italy",
-      "start": "2026-06-30",
-      "end": "2026-07-03",
-      "dates_display": "June 30 - July 3, 2026",
-      "paper_deadline": "passed",
-      "poster_deadline": "May 20, 2026 (late posters, passed)"
-    },
     {
       "name": "ICML 2026",
       "url": "https://icml.cc/Conferences/2026",
