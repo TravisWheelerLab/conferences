@@ -139,8 +139,8 @@
       "start": "2026-11-16",
       "end": "2026-11-17",
       "dates_display": "November 16 - 17, 2026",
-      "paper_deadline": "July 3, 2026",
-      "poster_deadline": "July 3, 2026"
+      "paper_deadline": "July 3, 2026 (passed)",
+      "poster_deadline": "July 3, 2026 (passed)"
     },
     {
       "name": "IEEE BIBM 2026",
@@ -149,7 +149,7 @@
       "start": "2026-12-01",
       "end": "2026-12-04",
       "dates_display": "December 1 - 4, 2026",
-      "paper_deadline": "July 5, 2026",
+      "paper_deadline": "July 5, 2026 (passed)",
       "poster_deadline": "TBD"
     },
     {
@@ -230,6 +230,16 @@
       "end": "2027-04-28",
       "dates_display": "April 24 - 28, 2027",
       "paper_deadline": "September 24, 2026",
+      "poster_deadline": "TBD"
+    },
+    {
+      "name": "CSHL Biology of Genomes 2027",
+      "url": "https://meetings.cshl.edu/meetings.aspx?meet=GENOME",
+      "location": "Cold Spring Harbor, New York, USA",
+      "start": "2027-05-11",
+      "end": "2027-05-15",
+      "dates_display": "May 11 - 15, 2027",
+      "paper_deadline": "February 19, 2027 (abstracts)",
       "poster_deadline": "TBD"
     }
   ]
