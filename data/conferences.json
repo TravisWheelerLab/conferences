@@ -1,17 +1,7 @@
 {
-  "updated": "2026-07-06",
+  "updated": "2026-07-13",
   "note": "Fields: name, url, location, start/end are ISO dates used for sorting and pruning; dates_display is the human-readable range. paper_deadline and poster_deadline are free text (a date, 'TBD', or 'passed').",
   "conferences": [
-    {
-      "name": "ICML 2026",
-      "url": "https://icml.cc/Conferences/2026",
-      "location": "Seoul, South Korea",
-      "start": "2026-07-06",
-      "end": "2026-07-11",
-      "dates_display": "July 6 - 11, 2026",
-      "paper_deadline": "January 28, 2026 (passed)",
-      "poster_deadline": "passed"
-    },
     {
       "name": "ISMB 2026",
       "url": "https://www.iscb.org/ismb2026/home",
