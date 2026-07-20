@@ -1,27 +1,7 @@
 {
-  "updated": "2026-07-13",
+  "updated": "2026-07-20",
   "note": "Fields: name, url, location, start/end are ISO dates used for sorting and pruning; dates_display is the human-readable range. paper_deadline and poster_deadline are free text (a date, 'TBD', or 'passed').",
   "conferences": [
-    {
-      "name": "ISMB 2026",
-      "url": "https://www.iscb.org/ismb2026/home",
-      "location": "Washington, DC, USA",
-      "start": "2026-07-12",
-      "end": "2026-07-16",
-      "dates_display": "July 12 - 16, 2026",
-      "paper_deadline": "April 9, 2026 (passed)",
-      "poster_deadline": "May 7, 2026 (passed)"
-    },
-    {
-      "name": "FASEB Genetic Recombination & Genome Rearrangements 2026",
-      "url": "https://events.faseb.org/event/Genetic-Recombination/summary",
-      "location": "Scottsdale, Arizona, USA",
-      "start": "2026-07-12",
-      "end": "2026-07-17",
-      "dates_display": "July 12 - 17, 2026",
-      "paper_deadline": "N/A",
-      "poster_deadline": "passed"
-    },
     {
       "name": "Protein Society 40th Annual Symposium (PS40)",
       "url": "https://www.proteinsociety.org/annual-symposium",
