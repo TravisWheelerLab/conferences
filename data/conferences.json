@@ -89,7 +89,7 @@
       "start": "2026-10-21",
       "end": "2026-10-24",
       "dates_display": "October 21 - 24, 2026",
-      "paper_deadline": "July 17, 2026 (extended)",
+      "paper_deadline": "July 17, 2026 (extended, passed)",
       "poster_deadline": "TBD"
     },
     {
@@ -210,6 +210,16 @@
       "end": "2027-05-15",
       "dates_display": "May 11 - 15, 2027",
       "paper_deadline": "February 19, 2027 (abstracts)",
+      "poster_deadline": "TBD"
+    },
+    {
+      "name": "Protein Society 41st Annual Symposium (PS41)",
+      "url": "https://www.proteinsociety.org/meetings",
+      "location": "San Francisco, California, USA",
+      "start": "2027-07-09",
+      "end": "2027-07-12",
+      "dates_display": "July 9 - 12, 2027",
+      "paper_deadline": "TBD",
       "poster_deadline": "TBD"
     }
   ]
