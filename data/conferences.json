@@ -19,7 +19,7 @@
       "start": "2026-08-31",
       "end": "2026-09-04",
       "dates_display": "August 31 - September 4, 2026",
-      "paper_deadline": "March 5, 2026 (passed)",
+      "paper_deadline": "March 16, 2026 (passed)",
       "poster_deadline": "April 30, 2026 (passed)"
     },
     {
@@ -40,7 +40,7 @@
       "end": "2026-09-17",
       "dates_display": "September 14 - 17, 2026",
       "paper_deadline": "May 17, 2026 (passed)",
-      "poster_deadline": "July 20, 2026 (abstracts)"
+      "poster_deadline": "August 24, 2026 (abstracts)"
     },
     {
       "name": "CSHL Transposable Elements 2026",
@@ -175,7 +175,7 @@
     {
       "name": "ICLR 2027",
       "url": "https://iclr.cc/Conferences/FutureMeetings",
-      "location": "West Coast, North America (TBD)",
+      "location": "Brazil (city TBD)",
       "start": "2027-04-24",
       "end": "2027-04-28",
       "dates_display": "April 24 - 28, 2027",
@@ -199,6 +199,16 @@
       "start": "2027-07-09",
       "end": "2027-07-12",
       "dates_display": "July 9 - 12, 2027",
+      "paper_deadline": "TBD",
+      "poster_deadline": "TBD"
+    },
+    {
+      "name": "ISMB/ECCB 2027",
+      "url": "https://www.iscb.org/conferences-events/about-ismb",
+      "location": "Copenhagen, Denmark",
+      "start": "2027-07-18",
+      "end": "2027-07-22",
+      "dates_display": "July 18 - 22, 2027",
       "paper_deadline": "TBD",
       "poster_deadline": "TBD"
     }
