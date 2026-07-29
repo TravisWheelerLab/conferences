@@ -12,3 +12,4 @@
 #   at https://claude.ai/code/routines and click "Run now" after adding URLs.
 
 # --- add URLs below this line ---
+https://coursesandconferences.wellcomeconnectingscience.org/event/genome-informatics-20261202/
