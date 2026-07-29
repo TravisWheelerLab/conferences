@@ -4,7 +4,7 @@ A lightweight, self-updating list of upcoming conferences and workshops relevant
 to the Wheeler Lab: bioinformatics, ML for biology, genomics, and protein
 structural modeling.
 
-**Live site:** https://traviswheelerlab.github.io/conferences/
+**Live site:** https://wheelerlab.org/conferences/
 
 ## How it works
 
