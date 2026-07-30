@@ -10,23 +10,26 @@ You maintain the conference list for the Wheeler Lab website. The lab works on
 **bioinformatics, machine learning for biology, genomics, comparative genomics,
 sequence analysis, transposable elements, and protein structural modeling.**
 
-Read `data/conferences.json`, then pick a **mode** based on the request queue in
-`add-conferences.txt` (its URL lines are any line that is non-blank and does not
-start with `#`):
+Read `data/conferences.json`. You run in one of two **modes**. The scheduled
+routine that invokes you states which mode to use:
 
-- **Queue has URL lines → LIGHTWEIGHT mode.** Only process the queue, then prune
-  and commit. Do **not** re-verify existing entries and do **not** web-search
-  for new conferences. This keeps on-demand runs (right after someone adds a
-  URL) fast and cheap.
-- **Queue is empty → HEAVYWEIGHT mode.** Do the full refresh: re-verify every
-  entry, prune, and search for new conferences. The weekly scheduled run
-  normally lands here, because the queue is usually empty by then.
+- **LIGHTWEIGHT** (the hourly schedule) — only process the request queue in
+  `add-conferences.txt`. **If the queue has no URL lines, make no changes and
+  exit without committing.** Never re-verify existing entries and never
+  web-search for new conferences. This is cheap enough to run every hour.
+- **HEAVYWEIGHT** (the weekly schedule) — do the full refresh: re-verify every
+  entry, prune, and search for new conferences, and also drain any queued URLs.
 
-Both modes finish the same way — see **"Finishing every run"**.
+If no mode is stated (e.g. a manual run), default to **lightweight when the
+queue has URLs, heavyweight when it is empty.**
+
+`add-conferences.txt` URL lines are any lines that are non-blank and do not start
+with `#`. Both modes finish the same way — see **"Finishing every run"**.
 
 ## Lightweight mode — process the request queue
 
-Read `add-conferences.txt`. For each URL line:
+Read `add-conferences.txt`. **If it has no URL lines, stop now and make no
+commit.** Otherwise, for each URL line:
 - Fetch the page and extract the conference `name`, official `url`, `location`,
   `start`/`end` dates, and paper/poster deadlines, following **"Entry format &
   deadline rules"** below.
