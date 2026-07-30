@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-27",
+  "updated": "2026-07-30",
   "note": "Fields: name, url, location, start/end are ISO dates used for sorting and pruning; dates_display is the human-readable range. paper_deadline and poster_deadline are free text (a date, 'TBD', or 'passed').",
   "conferences": [
     {
@@ -83,6 +83,16 @@
       "poster_deadline": "August 2, 2026 (ARR commitment deadline)"
     },
     {
+      "name": "IEEE VIS 2026",
+      "url": "https://ieeevis.org/year/2026/welcome/",
+      "location": "Boston, Massachusetts, USA",
+      "start": "2026-11-09",
+      "end": "2026-11-13",
+      "dates_display": "November 9 - 13, 2026",
+      "paper_deadline": "March 21, 2026 (passed)",
+      "poster_deadline": "June 24, 2026 (passed)"
+    },
+    {
       "name": "MLCB 2026",
       "url": "https://www.mlcb.org/",
       "location": "New York Genome Center, NYC, USA",
@@ -101,6 +111,16 @@
       "dates_display": "December 1 - 4, 2026",
       "paper_deadline": "July 5, 2026 (passed)",
       "poster_deadline": "TBD"
+    },
+    {
+      "name": "Genome Informatics 2026",
+      "url": "https://coursesandconferences.wellcomeconnectingscience.org/event/genome-informatics-20261202/",
+      "location": "Wellcome Genome Campus, Hinxton, UK",
+      "start": "2026-12-02",
+      "end": "2026-12-04",
+      "dates_display": "December 2 - 4, 2026",
+      "paper_deadline": "N/A",
+      "poster_deadline": "November 30, 2026 (abstracts)"
     },
     {
       "name": "NeurIPS 2026",
@@ -179,7 +199,7 @@
       "start": "2027-04-24",
       "end": "2027-04-28",
       "dates_display": "April 24 - 28, 2027",
-      "paper_deadline": "September 24, 2026",
+      "paper_deadline": "September 16, 2026",
       "poster_deadline": "TBD"
     },
     {
