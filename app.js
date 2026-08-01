@@ -155,8 +155,8 @@ function attendeesCell(conf, attendeeMap) {
     const form = el("div", { className: "add-form" });
     const input = el("input");
     input.type = "text";
-    input.placeholder = "Name";
-    input.autocomplete = "name";
+    input.placeholder = "Name (or comma-separated names)";
+    input.autocomplete = "off";
     const save = el("button", { text: "Save", className: "btn-primary" });
     save.type = "button";
     const cancel = el("button", { text: "Cancel", className: "btn-quiet" });
@@ -176,21 +176,22 @@ function attendeesCell(conf, attendeeMap) {
     });
 
     save.addEventListener("click", async () => {
-      const person = input.value.trim();
-      if (!person) return;
+      const people = splitNames(input.value);
+      if (people.length === 0) return;
       save.disabled = true;
       cancel.disabled = true;
       showStatus("Saving…", false);
       try {
         await ensureToken();
-        await commitAttendee(conf.name, person);
-        wrap.insertBefore(chip(person), addBtn);
+        const added = await commitAttendee(conf.name, people);
+        for (const person of added) wrap.insertBefore(chip(person), addBtn);
         const existingKey = Object.keys(attendeeMap).find(
           (k) => k.trim().toLowerCase() === conf.name.trim().toLowerCase()
         );
         const key = existingKey || conf.name;
-        attendeeMap[key] = (attendeeMap[key] || []).concat(person);
-        showStatus("Saved — live on the page within ~1 min.", false);
+        attendeeMap[key] = (attendeeMap[key] || []).concat(added);
+        const n = added.length;
+        showStatus(`Saved ${n} name${n === 1 ? "" : "s"} — live within ~1 min.`, false);
         done();
       } catch (err) {
         console.error(err);
@@ -353,7 +354,24 @@ async function commitFile(path, transform, message, attempt = 0) {
   }
 }
 
-function commitAttendee(confName, person) {
+// Splits a free-text field into names on commas, semicolons, or newlines
+// (never on spaces — names contain them).
+function splitNames(str) {
+  return (str || "")
+    .split(/[,;\n]+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+// Adds one or more people to a conference. Skips names already present; resolves
+// to the list of names actually added (empty-input / all-duplicate cases reject).
+function commitAttendee(confName, people) {
+  const requested = Array.isArray(people) ? people : splitNames(people);
+  const cleaned = requested.map((p) => p.trim()).filter(Boolean);
+  if (cleaned.length === 0) {
+    return Promise.reject(new Error("Enter at least one name."));
+  }
+  const added = [];
   return commitFile(
     ATTENDEES_PATH,
     (raw) => {
@@ -369,15 +387,28 @@ function commitAttendee(confName, person) {
         Object.keys(doc.attendees).find((k) => k.trim().toLowerCase() === want) ||
         confName;
       const list = Array.isArray(doc.attendees[key]) ? doc.attendees[key] : [];
-      if (list.some((n) => n.trim().toLowerCase() === person.trim().toLowerCase())) {
-        throw new Error(`${person} is already listed for this conference.`);
+      added.length = 0; // reset so a 409 retry re-computes cleanly
+      for (const person of cleaned) {
+        const dup =
+          list.some((n) => n.trim().toLowerCase() === person.toLowerCase()) ||
+          added.some((n) => n.toLowerCase() === person.toLowerCase());
+        if (!dup) {
+          list.push(person);
+          added.push(person);
+        }
       }
-      list.push(person);
+      if (added.length === 0) {
+        throw new Error(
+          cleaned.length === 1
+            ? `${cleaned[0]} is already listed for this conference.`
+            : "Everyone listed is already there."
+        );
+      }
       doc.attendees[key] = list;
       return JSON.stringify(doc, null, 2) + "\n";
     },
-    `Add ${person} to ${confName}`
-  );
+    `Add ${cleaned.join(", ")} to ${confName}`
+  ).then(() => added.slice());
 }
 
 function hideConference(conf) {
