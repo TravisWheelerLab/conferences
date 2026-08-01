@@ -33,6 +33,26 @@
       "poster_deadline": "TBD"
     },
     {
+      "name": "HPRC Annual Business Meeting 2026",
+      "url": "",
+      "location": "St. Louis, MO",
+      "start": "2026-09-09",
+      "end": "2026-09-11",
+      "dates_display": "September 9 - 11, 2026",
+      "paper_deadline": "N/A",
+      "poster_deadline": "N/A"
+    },
+    {
+      "name": "Repbase/Dfam Retreat 2026",
+      "url": "",
+      "location": "Asilomar, Monterey, CA",
+      "start": "2026-09-13",
+      "end": "2026-09-15",
+      "dates_display": "September 13 - 15, 2026",
+      "paper_deadline": "N/A",
+      "poster_deadline": "N/A"
+    },
+    {
       "name": "InCoB/ISCB-APAC 2026",
       "url": "https://incob.apbionet.org/incob2026/",
       "location": "Penang, Malaysia",
