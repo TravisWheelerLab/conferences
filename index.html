@@ -93,6 +93,30 @@
     </div>
   </div>
 
+  <!-- Edit-request modal: queues a plain-English change for one conference into
+       edit-requests.txt for the discovery agent to apply. -->
+  <div id="edit-modal" class="modal" hidden>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="edit-title">
+      <h3 id="edit-title">Request an edit</h3>
+      <p class="modal-help">
+        Editing <strong id="edit-conf-name"></strong>. Describe the change in
+        plain English; the system applies it to the page within about an hour
+        (verifying against the real site where it can).
+      </p>
+      <p class="modal-help">
+        e.g. <code>poster deadline should be October 5, 2026</code> &nbsp;or&nbsp;
+        <code>location moved to Barcelona, Spain</code>
+      </p>
+      <textarea id="edit-input" rows="3" placeholder="Describe the change…"></textarea>
+      <p id="edit-status" class="modal-status"></p>
+      <div class="modal-actions">
+        <span class="spacer"></span>
+        <button type="button" id="edit-cancel" class="btn-quiet">Cancel</button>
+        <button type="button" id="edit-submit" class="btn-primary">Submit edit</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Token modal: lets a lab member store a GitHub token (in this browser only)
        so the "+ Add" buttons can commit attendee changes to the repo. -->
   <div id="token-modal" class="modal" hidden>

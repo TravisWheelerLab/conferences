@@ -1,1 +1,16 @@
+# Edit requests — one per line.
+#
+# Each line names a conference (as it appears on the page) followed by a plain-
+# English description of the change, e.g.
+#   Genome Informatics 2026 — poster deadline should be October 5, 2026
+#
+# The scheduled discovery agent reads this file on every run, finds the matching
+# entry in data/conferences.json, applies the requested change (verifying against
+# the real site where it can; it will not invent dates), and removes the line.
+# Anything it can't confidently apply is left here with a note so you can check.
+#
+# - Lines starting with "#" and blank lines are ignored.
+# - The website's per-row "Edit" button appends lines here for you.
+
+# --- add edit requests below this line ---
 Genome Informatics 2026 — deadline should be October 5, 2026

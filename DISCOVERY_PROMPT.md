@@ -13,17 +13,19 @@ sequence analysis, transposable elements, and protein structural modeling.**
 Read `data/conferences.json`. You run in one of two **modes**. The scheduled
 routine that invokes you states which mode to use:
 
-- **LIGHTWEIGHT** (the hourly schedule) — only process the request queue in
-  `add-conferences.txt`. **If the queue has no URL lines, make no changes and
+- **LIGHTWEIGHT** (the hourly schedule) — only process the two request queues:
+  `add-conferences.txt` (new conferences) and `edit-requests.txt` (changes to
+  existing ones). **If both queues have no request lines, make no changes and
   exit without committing.** Never re-verify existing entries and never
-  web-search for new conferences. This is cheap enough to run every hour.
+  web-search for new conferences beyond what a queued line asks for. This is
+  cheap enough to run every hour.
 - **HEAVYWEIGHT** (the weekly schedule) — do the full refresh: re-verify every
-  entry, prune, and search for new conferences, and also drain any queued URLs.
+  entry, prune, and search for new conferences, and also drain both queues.
 
-If no mode is stated (e.g. a manual run), default to **lightweight when the
-queue has URLs, heavyweight when it is empty.**
+If no mode is stated (e.g. a manual run), default to **lightweight when either
+queue has lines, heavyweight when both are empty.**
 
-`add-conferences.txt` URL lines are any lines that are non-blank and do not start
+A "request line" in either file is any line that is non-blank and does not start
 with `#`. Both modes finish the same way — see **"Finishing every run"**.
 
 ## Lightweight mode — process the request queue
@@ -52,6 +54,22 @@ each request line:
 - If you cannot extract reliable info from a request, leave that line in the file
   and append `  # could not verify YYYY-MM-DD` so a human can look.
 
+### Edit requests
+
+Read `edit-requests.txt`. Each request line is a conference name followed by a
+plain-English change, e.g.
+`Genome Informatics 2026 — poster deadline should be October 5, 2026`. For each:
+- Find the matching entry in `data/conferences.json` (match the leading name,
+  case-insensitively; it need not be exact). If none matches, leave the line with
+  `  # no match YYYY-MM-DD` and move on.
+- Apply the requested change to that entry. The user is correcting the data, so
+  **treat their stated value as authoritative** — but you may quickly confirm it
+  against the official site, and should format dates like the other entries
+  (e.g. `"October 5, 2026"`). Do not change fields the request didn't mention.
+- If a change is genuinely implausible (e.g. a date outside the event), don't
+  guess — leave the line with `  # please clarify YYYY-MM-DD`.
+- **Remove every line you successfully applied.**
+
 Then run `python3 scripts/prune.py` and finish. **Stop here** — do not re-verify
 other entries or run discovery.
 
@@ -69,8 +87,9 @@ other entries or run discovery.
    file** — work through the Watchlist below. **Never add anything that matches an
    entry in `data/hidden.json`** (name or URL) — the user removed those on
    purpose.
-4. Also process any URLs in `add-conferences.txt` exactly as in Lightweight
-   mode, clearing the lines you handle.
+4. Also drain both queues exactly as in Lightweight mode — `add-conferences.txt`
+   (new conferences) and `edit-requests.txt` (edits) — clearing the lines you
+   handle.
 
 ## Entry format & deadline rules
 

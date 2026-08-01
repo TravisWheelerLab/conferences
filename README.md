@@ -44,6 +44,15 @@ You can also edit `add-conferences.txt` directly and commit — same result. To
 process immediately instead of waiting, open the routine at
 https://claude.ai/code/routines and click **Run now**.
 
+## Editing a conference
+
+Click **Edit** at the end of a conference's row and describe the change in plain
+English (e.g. `poster deadline should be October 5, 2026`). The request is
+appended to **`edit-requests.txt`**; on its next run the discovery agent finds
+the entry, applies the change (your stated value wins; it may verify against the
+site), and removes the line. You can also edit `data/conferences.json` directly
+for an instant change.
+
 ## Removing a conference
 
 Click the **✕** at the end of a conference's row and confirm. Its name/URL is

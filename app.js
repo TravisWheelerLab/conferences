@@ -14,6 +14,7 @@ const REPO = "TravisWheelerLab/conferences";
 const ATTENDEES_PATH = "data/attendees.json";
 const HIDDEN_PATH = "data/hidden.json";
 const QUEUE_PATH = "add-conferences.txt";
+const EDITS_PATH = "edit-requests.txt";
 const BRANCH = "main";
 const TOKEN_KEY = "conf_gh_token";
 
@@ -29,6 +30,20 @@ function parseISO(d) {
 function startOfToday() {
   const n = new Date();
   return new Date(n.getFullYear(), n.getMonth(), n.getDate());
+}
+
+// Brief bottom-center confirmation that fades out on its own.
+function showToast(msg) {
+  const t = document.createElement("div");
+  t.className = "toast";
+  t.textContent = msg;
+  document.body.appendChild(t);
+  // Force reflow so the fade-in transition runs, then schedule removal.
+  requestAnimationFrame(() => t.classList.add("show"));
+  setTimeout(() => {
+    t.classList.remove("show");
+    setTimeout(() => t.remove(), 400);
+  }, 3500);
 }
 
 function el(tag, opts = {}) {
@@ -217,46 +232,52 @@ function refreshUpcomingCount() {
 function actionsCell(conf, tr) {
   const td = el("td", { className: "actions" });
 
+  const editBtn = el("button", { text: "Edit", className: "edit-btn" });
+  editBtn.type = "button";
+  editBtn.title = "Request an edit to this entry";
+  editBtn.addEventListener("click", () => openEditModal(conf));
+  td.appendChild(editBtn);
+
   const removeBtn = el("button", { text: "✕", className: "remove-btn" });
   removeBtn.type = "button";
   removeBtn.title = "Remove from page";
   td.appendChild(removeBtn);
 
-  removeBtn.addEventListener("click", () => {
-    td.textContent = "";
-    const confirmWrap = el("span", { className: "remove-confirm" });
-    confirmWrap.appendChild(document.createTextNode("Remove?"));
-    const yes = el("button", { text: "Yes", className: "btn-quiet" });
-    const no = el("button", { text: "No", className: "btn-quiet" });
-    yes.type = no.type = "button";
-    confirmWrap.append(yes, no);
-    td.appendChild(confirmWrap);
+  const confirmWrap = el("span", { className: "remove-confirm" });
+  confirmWrap.hidden = true;
+  confirmWrap.appendChild(document.createTextNode("Remove?"));
+  const yes = el("button", { text: "Yes", className: "btn-quiet" });
+  const no = el("button", { text: "No", className: "btn-quiet" });
+  yes.type = no.type = "button";
+  confirmWrap.append(yes, no);
 
-    function reset() {
+  function showConfirm(on) {
+    editBtn.hidden = on;
+    removeBtn.hidden = on;
+    confirmWrap.hidden = !on;
+  }
+
+  removeBtn.addEventListener("click", () => showConfirm(true));
+  no.addEventListener("click", () => showConfirm(false));
+  yes.addEventListener("click", async () => {
+    yes.disabled = no.disabled = true;
+    try {
+      await ensureToken();
+      await hideConference(conf);
+      tr.remove();
+      g.upcomingCount = Math.max(0, g.upcomingCount - 1);
+      refreshUpcomingCount();
+    } catch (err) {
+      console.error(err);
       td.textContent = "";
-      td.appendChild(removeBtn);
+      td.appendChild(el("span", {
+        text: err.message || "Could not remove.",
+        className: "row-status err",
+      }));
     }
-    no.addEventListener("click", reset);
-
-    yes.addEventListener("click", async () => {
-      yes.disabled = no.disabled = true;
-      confirmWrap.appendChild(document.createTextNode(" …"));
-      try {
-        await ensureToken();
-        await hideConference(conf);
-        tr.remove();
-        g.upcomingCount = Math.max(0, g.upcomingCount - 1);
-        refreshUpcomingCount();
-      } catch (err) {
-        console.error(err);
-        td.textContent = "";
-        const msg = el("span", { text: err.message || "Could not remove.", className: "row-status err" });
-        td.appendChild(msg);
-        setTimeout(reset, 3000);
-      }
-    });
   });
 
+  td.appendChild(confirmWrap);
   return td;
 }
 
@@ -397,6 +418,22 @@ function queueRequests(lines) {
   );
 }
 
+// Appends one edit request: "<conference name> — <plain-English change>".
+function queueEdit(confName, description) {
+  const change = description.replace(/\s*\n\s*/g, "; ").trim();
+  if (!change) throw new Error("Describe the change first.");
+  const line = `${confName} — ${change}`;
+  return commitFile(
+    EDITS_PATH,
+    (raw) => {
+      let text = raw;
+      if (text && !text.endsWith("\n")) text += "\n";
+      return text + line + "\n";
+    },
+    `Queue edit for ${confName}`
+  );
+}
+
 // ---- Token modal wiring ---------------------------------------------------
 
 let tokenResolve = null;
@@ -505,12 +542,72 @@ function wireAddModal() {
       await ensureToken();
       await queueRequests(lines);
       const n = lines.length;
-      status.textContent = `Queued ${n} — the system will add ${n === 1 ? "it" : "them"} to the page within about an hour.`;
-      status.className = "modal-status ok";
       input.value = "";
+      close();
+      showToast(`Queued ${n} — the system will add ${n === 1 ? "it" : "them"} to the page within about an hour.`);
     } catch (err) {
       console.error(err);
       status.textContent = err.message || "Could not queue.";
+      status.className = "modal-status err";
+    }
+    submit.disabled = false;
+    cancel.disabled = false;
+  });
+}
+
+// ---- Edit-request modal wiring --------------------------------------------
+
+let editConf = null;
+
+function openEditModal(conf) {
+  editConf = conf;
+  document.getElementById("edit-conf-name").textContent = conf.name;
+  const input = document.getElementById("edit-input");
+  const status = document.getElementById("edit-status");
+  input.value = "";
+  status.textContent = "";
+  status.className = "modal-status";
+  document.getElementById("edit-submit").disabled = false;
+  document.getElementById("edit-cancel").disabled = false;
+  document.getElementById("edit-modal").hidden = false;
+  input.focus();
+}
+
+function wireEditModal() {
+  const modal = document.getElementById("edit-modal");
+  const input = document.getElementById("edit-input");
+  const status = document.getElementById("edit-status");
+  const submit = document.getElementById("edit-submit");
+  const cancel = document.getElementById("edit-cancel");
+
+  function close() {
+    modal.hidden = true;
+  }
+  cancel.addEventListener("click", close);
+  modal.addEventListener("click", (e) => {
+    if (e.target.id === "edit-modal") close();
+  });
+
+  submit.addEventListener("click", async () => {
+    const desc = input.value.trim();
+    if (!desc) {
+      status.textContent = "Describe the change first.";
+      status.className = "modal-status err";
+      return;
+    }
+    submit.disabled = true;
+    cancel.disabled = true;
+    status.textContent = "Submitting edit…";
+    status.className = "modal-status";
+    try {
+      await ensureToken();
+      await queueEdit(editConf.name, desc);
+      input.value = "";
+      close();
+      showToast("Edit queued — the system will apply it to the page within about an hour.");
+    } catch (err) {
+      console.error(err);
+      status.textContent = err.message || "Could not submit.";
       status.className = "modal-status err";
     }
     submit.disabled = false;
@@ -572,6 +669,7 @@ async function loadJSON(path) {
 async function main() {
   wireTokenModal();
   wireAddModal();
+  wireEditModal();
 
   let data;
   try {
