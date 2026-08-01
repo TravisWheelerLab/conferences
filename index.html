@@ -18,7 +18,10 @@
 
   <main>
     <section>
-      <h2>Upcoming</h2>
+      <div class="section-head">
+        <h2>Upcoming</h2>
+        <button type="button" id="add-conf-btn" class="btn-primary">+ Add a conference</button>
+      </div>
       <table id="upcoming-table">
         <thead>
           <tr>
@@ -28,6 +31,7 @@
             <th>Paper deadline</th>
             <th>Poster deadline</th>
             <th>Attending</th>
+            <th><span class="sr-only">Actions</span></th>
           </tr>
         </thead>
         <tbody></tbody>
@@ -54,14 +58,40 @@
 
   <footer>
     <p>
-      Data lives in <code>data/conferences.json</code>. Passed conferences are
-      pruned automatically; new ones are added by a scheduled agent.
+      Data lives in <code>data/conferences.json</code>. Passed conferences move
+      to <code>data/archive.json</code> automatically; new ones are added by a
+      scheduled agent.
     </p>
     <p>
       Attendees live in <code>data/attendees.json</code>.
       <a href="#" id="token-link">GitHub token&hellip;</a>
     </p>
   </footer>
+
+  <!-- Add-conference modal: queues URLs or free-text descriptions into
+       add-conferences.txt for the discovery agent to pick up. -->
+  <div id="add-modal" class="modal" hidden>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="add-title">
+      <h3 id="add-title">Add a conference</h3>
+      <p class="modal-help">
+        Paste a <strong>URL</strong>, or type a <strong>short description</strong> —
+        one per line, mix freely. The system adds them to the page within about an
+        hour (it fetches URLs and interprets descriptions, verifying against the
+        real site).
+      </p>
+      <p class="modal-help">
+        e.g. <code>https://example.org/conf2027</code> &nbsp;or&nbsp;
+        <code>Asilomar Repbase/Dfam retreat - Sept 13-16 at Asilomar (Monterey)</code>
+      </p>
+      <textarea id="add-input" rows="4" placeholder="One URL or description per line…"></textarea>
+      <p id="add-status" class="modal-status"></p>
+      <div class="modal-actions">
+        <span class="spacer"></span>
+        <button type="button" id="add-cancel" class="btn-quiet">Cancel</button>
+        <button type="button" id="add-submit" class="btn-primary">Add to queue</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Token modal: lets a lab member store a GitHub token (in this browser only)
        so the "+ Add" buttons can commit attendee changes to the repo. -->

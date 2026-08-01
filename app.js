@@ -1,17 +1,24 @@
 "use strict";
 
-// Renders the conference tables from data/conferences.json and overlays the
-// attendee lists from data/attendees.json. A conference is "past" once its end
-// date is before today (local time).
+// Renders the conference tables from data/conferences.json, overlays attendee
+// lists (data/attendees.json), and hides manually-removed conferences
+// (data/hidden.json). A conference is "past" once its end date is before today.
 //
-// The "Attending" column lets a lab member add their name in-page. Because the
-// site is static, adds are persisted by committing data/attendees.json back to
-// the repo via the GitHub Contents API, using a token the user stores locally.
+// Three in-page actions persist by committing back to the repo via the GitHub
+// Contents API, using a token the user stores locally (never in the page):
+//   - "+ Add" in the Attending column       -> data/attendees.json
+//   - "+ Add a conference" button            -> add-conferences.txt (a queue)
+//   - the ✕ on a row                         -> data/hidden.json
 
 const REPO = "TravisWheelerLab/conferences";
 const ATTENDEES_PATH = "data/attendees.json";
+const HIDDEN_PATH = "data/hidden.json";
+const QUEUE_PATH = "add-conferences.txt";
 const BRANCH = "main";
 const TOKEN_KEY = "conf_gh_token";
+
+// Populated in main(); used to keep the "N upcoming" line current after a remove.
+const g = { updated: "", upcomingCount: 0 };
 
 function parseISO(d) {
   // d is "YYYY-MM-DD"; build a local Date at midnight.
@@ -163,7 +170,6 @@ function attendeesCell(conf, attendeeMap) {
         await ensureToken();
         await commitAttendee(conf.name, person);
         wrap.insertBefore(chip(person), addBtn);
-        // Keep the in-memory map current for subsequent adds this session.
         const existingKey = Object.keys(attendeeMap).find(
           (k) => k.trim().toLowerCase() === conf.name.trim().toLowerCase()
         );
@@ -183,7 +189,78 @@ function attendeesCell(conf, attendeeMap) {
   return td;
 }
 
-// ---- GitHub token + commit ------------------------------------------------
+// ---- Remove (hide) --------------------------------------------------------
+
+// De-dup key for past entries (live-file past + archive can overlap).
+function pastKey(conf) {
+  return (conf.name || "").trim().toLowerCase() + "|" + (conf.start || "");
+}
+
+function isHidden(conf, hiddenList) {
+  const n = (conf.name || "").trim().toLowerCase();
+  const u = (conf.url || "").trim().toLowerCase();
+  return hiddenList.some((h) => {
+    const hn = (h.name || "").trim().toLowerCase();
+    const hu = (h.url || "").trim().toLowerCase();
+    return (hn && hn === n) || (hu && hu === u);
+  });
+}
+
+function refreshUpcomingCount() {
+  if (!g.updated) return;
+  document.getElementById("updated").textContent =
+    "Last updated " + g.updated + " · " + g.upcomingCount + " upcoming";
+}
+
+// Builds the trailing actions cell with a ✕ that hides the conference after an
+// inline confirm.
+function actionsCell(conf, tr) {
+  const td = el("td", { className: "actions" });
+
+  const removeBtn = el("button", { text: "✕", className: "remove-btn" });
+  removeBtn.type = "button";
+  removeBtn.title = "Remove from page";
+  td.appendChild(removeBtn);
+
+  removeBtn.addEventListener("click", () => {
+    td.textContent = "";
+    const confirmWrap = el("span", { className: "remove-confirm" });
+    confirmWrap.appendChild(document.createTextNode("Remove?"));
+    const yes = el("button", { text: "Yes", className: "btn-quiet" });
+    const no = el("button", { text: "No", className: "btn-quiet" });
+    yes.type = no.type = "button";
+    confirmWrap.append(yes, no);
+    td.appendChild(confirmWrap);
+
+    function reset() {
+      td.textContent = "";
+      td.appendChild(removeBtn);
+    }
+    no.addEventListener("click", reset);
+
+    yes.addEventListener("click", async () => {
+      yes.disabled = no.disabled = true;
+      confirmWrap.appendChild(document.createTextNode(" …"));
+      try {
+        await ensureToken();
+        await hideConference(conf);
+        tr.remove();
+        g.upcomingCount = Math.max(0, g.upcomingCount - 1);
+        refreshUpcomingCount();
+      } catch (err) {
+        console.error(err);
+        td.textContent = "";
+        const msg = el("span", { text: err.message || "Could not remove.", className: "row-status err" });
+        td.appendChild(msg);
+        setTimeout(reset, 3000);
+      }
+    });
+  });
+
+  return td;
+}
+
+// ---- GitHub token + generic commit ----------------------------------------
 
 function getToken() {
   return localStorage.getItem(TOKEN_KEY) || "";
@@ -210,56 +287,42 @@ function decodeB64(b64) {
   return new TextDecoder().decode(bytes);
 }
 
-// Opens the token modal if no token is stored, and resolves once one exists.
-function ensureToken() {
-  if (getToken()) return Promise.resolve();
-  return openTokenModal({ requireSave: true });
-}
-
-// GET the current attendees file, add the person, and PUT it back. Retries once
-// on a 409 (someone else committed between our GET and PUT).
-async function commitAttendee(confName, person, attempt = 0) {
-  const base = `https://api.github.com/repos/${REPO}/contents/${ATTENDEES_PATH}`;
+// GET a repo file, transform its raw text, and PUT it back. `transform(raw)`
+// returns the new text (or throws to abort with a message). Retries once on a
+// 409 (someone committed between our GET and PUT). Handles a missing file (404).
+async function commitFile(path, transform, message, attempt = 0) {
+  const base = `https://api.github.com/repos/${REPO}/contents/${path}`;
   const getResp = await fetch(base + `?ref=${BRANCH}&t=${Date.now()}`, {
     headers: authHeaders(),
     cache: "no-store",
   });
-  if (getResp.status === 401) throw new Error("Token rejected — check it in “GitHub token…”.");
-  if (!getResp.ok) throw new Error(`Could not read attendees file (${getResp.status}).`);
-  const meta = await getResp.json();
 
-  let doc;
-  try {
-    doc = JSON.parse(decodeB64(meta.content));
-  } catch {
-    doc = {};
+  let sha;
+  let raw = "";
+  if (getResp.status === 404) {
+    sha = undefined;
+  } else if (getResp.status === 401) {
+    throw new Error("Token rejected — check it in “GitHub token…”.");
+  } else if (!getResp.ok) {
+    throw new Error(`Could not read ${path} (${getResp.status}).`);
+  } else {
+    const meta = await getResp.json();
+    sha = meta.sha;
+    raw = decodeB64(meta.content);
   }
-  if (!doc.attendees || typeof doc.attendees !== "object") doc.attendees = {};
 
-  const want = confName.trim().toLowerCase();
-  const key =
-    Object.keys(doc.attendees).find((k) => k.trim().toLowerCase() === want) ||
-    confName;
-  const list = Array.isArray(doc.attendees[key]) ? doc.attendees[key] : [];
-  if (list.some((n) => n.trim().toLowerCase() === person.trim().toLowerCase())) {
-    throw new Error(`${person} is already listed for this conference.`);
-  }
-  list.push(person);
-  doc.attendees[key] = list;
+  const next = transform(raw);
 
-  const body = {
-    message: `Add ${person} to ${key}`,
-    content: encodeB64(JSON.stringify(doc, null, 2) + "\n"),
-    sha: meta.sha,
-    branch: BRANCH,
-  };
+  const body = { message, content: encodeB64(next), branch: BRANCH };
+  if (sha) body.sha = sha;
+
   const putResp = await fetch(base, {
     method: "PUT",
     headers: authHeaders(),
     body: JSON.stringify(body),
   });
   if (putResp.status === 409 && attempt < 2) {
-    return commitAttendee(confName, person, attempt + 1);
+    return commitFile(path, transform, message, attempt + 1);
   }
   if (putResp.status === 401 || putResp.status === 403) {
     throw new Error("Token lacks write access to the repo.");
@@ -267,6 +330,71 @@ async function commitAttendee(confName, person, attempt = 0) {
   if (!putResp.ok) {
     throw new Error(`Save failed (${putResp.status}).`);
   }
+}
+
+function commitAttendee(confName, person) {
+  return commitFile(
+    ATTENDEES_PATH,
+    (raw) => {
+      let doc;
+      try {
+        doc = JSON.parse(raw);
+      } catch {
+        doc = {};
+      }
+      if (!doc.attendees || typeof doc.attendees !== "object") doc.attendees = {};
+      const want = confName.trim().toLowerCase();
+      const key =
+        Object.keys(doc.attendees).find((k) => k.trim().toLowerCase() === want) ||
+        confName;
+      const list = Array.isArray(doc.attendees[key]) ? doc.attendees[key] : [];
+      if (list.some((n) => n.trim().toLowerCase() === person.trim().toLowerCase())) {
+        throw new Error(`${person} is already listed for this conference.`);
+      }
+      list.push(person);
+      doc.attendees[key] = list;
+      return JSON.stringify(doc, null, 2) + "\n";
+    },
+    `Add ${person} to ${confName}`
+  );
+}
+
+function hideConference(conf) {
+  return commitFile(
+    HIDDEN_PATH,
+    (raw) => {
+      let doc;
+      try {
+        doc = JSON.parse(raw);
+      } catch {
+        doc = {};
+      }
+      if (!Array.isArray(doc.hidden)) doc.hidden = [];
+      if (!isHidden(conf, doc.hidden)) {
+        doc.hidden.push({ name: conf.name || "", url: conf.url || "" });
+      }
+      return JSON.stringify(doc, null, 2) + "\n";
+    },
+    `Hide conference: ${conf.name}`
+  );
+}
+
+function queueRequests(lines) {
+  const clean = lines.map((l) => l.trim()).filter(Boolean);
+  if (clean.length === 0) throw new Error("Nothing to add.");
+  const message =
+    clean.length === 1
+      ? `Queue conference request: ${clean[0].slice(0, 72)}`
+      : `Queue ${clean.length} conference requests`;
+  return commitFile(
+    QUEUE_PATH,
+    (raw) => {
+      let text = raw;
+      if (text && !text.endsWith("\n")) text += "\n";
+      return text + clean.join("\n") + "\n";
+    },
+    message
+  );
 }
 
 // ---- Token modal wiring ---------------------------------------------------
@@ -292,10 +420,15 @@ function closeTokenModal(saved) {
   if (tokenResolve) {
     const { resolve, requireSave } = tokenResolve;
     tokenResolve = null;
-    // If a save was required (add flow) but none happened, reject the wait.
     if (requireSave && !saved) resolve(Promise.reject(new Error("No token entered.")));
     else resolve();
   }
+}
+
+// Opens the token modal if no token is stored, and resolves once one exists.
+function ensureToken() {
+  if (getToken()) return Promise.resolve();
+  return openTokenModal({ requireSave: true });
 }
 
 function wireTokenModal() {
@@ -329,6 +462,62 @@ function wireTokenModal() {
   });
 }
 
+// ---- Add-conference modal wiring ------------------------------------------
+
+function wireAddModal() {
+  const modal = document.getElementById("add-modal");
+  const input = document.getElementById("add-input");
+  const status = document.getElementById("add-status");
+  const submit = document.getElementById("add-submit");
+  const cancel = document.getElementById("add-cancel");
+
+  function open() {
+    input.value = "";
+    status.textContent = "";
+    status.className = "modal-status";
+    submit.disabled = false;
+    cancel.disabled = false;
+    modal.hidden = false;
+    input.focus();
+  }
+  function close() {
+    modal.hidden = true;
+  }
+
+  document.getElementById("add-conf-btn").addEventListener("click", open);
+  cancel.addEventListener("click", close);
+  modal.addEventListener("click", (e) => {
+    if (e.target.id === "add-modal") close();
+  });
+
+  submit.addEventListener("click", async () => {
+    const lines = input.value.split("\n").map((s) => s.trim()).filter(Boolean);
+    if (lines.length === 0) {
+      status.textContent = "Enter at least one URL or description.";
+      status.className = "modal-status err";
+      return;
+    }
+    submit.disabled = true;
+    cancel.disabled = true;
+    status.textContent = "Adding to queue…";
+    status.className = "modal-status";
+    try {
+      await ensureToken();
+      await queueRequests(lines);
+      const n = lines.length;
+      status.textContent = `Queued ${n} — the system will add ${n === 1 ? "it" : "them"} to the page within about an hour.`;
+      status.className = "modal-status ok";
+      input.value = "";
+    } catch (err) {
+      console.error(err);
+      status.textContent = err.message || "Could not queue.";
+      status.className = "modal-status err";
+    }
+    submit.disabled = false;
+    cancel.disabled = false;
+  });
+}
+
 // ---- Rendering ------------------------------------------------------------
 
 function renderUpcoming(list, today, attendeeMap) {
@@ -357,6 +546,7 @@ function renderUpcoming(list, today, attendeeMap) {
     tr.appendChild(deadlineCell(conf.paper_deadline));
     tr.appendChild(deadlineCell(conf.poster_deadline));
     tr.appendChild(attendeesCell(conf, attendeeMap));
+    tr.appendChild(actionsCell(conf, tr));
     tbody.appendChild(tr);
   }
 }
@@ -381,6 +571,7 @@ async function loadJSON(path) {
 
 async function main() {
   wireTokenModal();
+  wireAddModal();
 
   let data;
   try {
@@ -392,32 +583,58 @@ async function main() {
     return;
   }
 
-  // Attendees are optional; a missing/empty file just means no names yet.
+  // Attendees and the hidden list are optional overlays.
   let attendeeMap = {};
   try {
     const a = await loadJSON("data/attendees.json");
-    if (a && a.attendees && typeof a.attendees === "object") {
-      attendeeMap = a.attendees;
-    }
+    if (a && a.attendees && typeof a.attendees === "object") attendeeMap = a.attendees;
   } catch (err) {
     console.warn("No attendees data:", err);
   }
 
+  let hiddenList = [];
+  try {
+    const h = await loadJSON("data/hidden.json");
+    if (h && Array.isArray(h.hidden)) hiddenList = h.hidden;
+  } catch (err) {
+    console.warn("No hidden data:", err);
+  }
+
+  // Ended conferences live in the archive (moved there by prune.py). The live
+  // file may also hold a few not-yet-pruned past ones; merge and de-dupe.
+  let archive = [];
+  try {
+    const ar = await loadJSON("data/archive.json");
+    if (ar && Array.isArray(ar.conferences)) archive = ar.conferences;
+  } catch (err) {
+    console.warn("No archive data:", err);
+  }
+
   const today = startOfToday();
-  const all = (data.conferences || []).slice();
+  const all = (data.conferences || [])
+    .slice()
+    .filter((c) => !isHidden(c, hiddenList));
 
   const upcoming = all
     .filter((c) => parseISO(c.end) >= today)
     .sort((a, b) => parseISO(a.start) - parseISO(b.start));
 
-  const past = all
-    .filter((c) => parseISO(c.end) < today)
-    .sort((a, b) => parseISO(b.start) - parseISO(a.start));
-
-  if (data.updated) {
-    document.getElementById("updated").textContent =
-      "Last updated " + data.updated + " · " + upcoming.length + " upcoming";
+  const pastById = new Map();
+  for (const c of all) {
+    if (parseISO(c.end) < today) pastById.set(pastKey(c), c);
   }
+  for (const c of archive) {
+    if (!isHidden(c, hiddenList) && !pastById.has(pastKey(c))) {
+      pastById.set(pastKey(c), c);
+    }
+  }
+  const past = [...pastById.values()].sort(
+    (a, b) => parseISO(b.start) - parseISO(a.start)
+  );
+
+  g.updated = data.updated || "";
+  g.upcomingCount = upcoming.length;
+  refreshUpcomingCount();
 
   renderUpcoming(upcoming, today, attendeeMap);
   renderPast(past);

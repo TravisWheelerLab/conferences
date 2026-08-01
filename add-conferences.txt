@@ -1,15 +1,21 @@
-# Add conferences here — one URL per line.
+# Add conferences here — one request per line.
 #
-# The scheduled discovery agent reads this file on every run, visits each URL,
-# extracts the conference name, dates, location, and paper/poster deadlines, and
-# adds an entry to data/conferences.json (if it's not already there and its start
-# date is within the next ~12 months). URLs it successfully handles are removed
-# from this file; any it can't verify are left here with a note so you can check.
+# A line can be EITHER:
+#   - a URL (official site, or a program/CFP page), or
+#   - a short free-text description, e.g.
+#       Asilomar Repbase/Dfam retreat - Sept 13-16 at Asilomar (Monterey)
+#
+# The scheduled discovery agent reads this file on every run. For a URL it visits
+# the page; for a description it interprets the text and confirms details against
+# the real site. Either way it extracts the name, dates, location, and
+# paper/poster deadlines and adds an entry to data/conferences.json (if not
+# already there and its start date is within the next ~12 months). Lines it
+# successfully handles are removed; any it can't verify are left here with a note.
 #
 # - Lines starting with "#" and blank lines are ignored.
-# - Paste the official conference site if you can; a program/CFP page also works.
+# - The website's "+ Add a conference" button appends lines here for you.
 # - To process right away instead of waiting for the schedule, open the routine
-#   at https://claude.ai/code/routines and click "Run now" after adding URLs.
+#   at https://claude.ai/code/routines and click "Run now" after adding lines.
 
 # --- add URLs below this line ---
 Repbase/Dfam retreat - Sept 13-15 at Asilomar (Monterey)

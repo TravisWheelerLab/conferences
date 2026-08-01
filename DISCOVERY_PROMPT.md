@@ -28,19 +28,29 @@ with `#`. Both modes finish the same way — see **"Finishing every run"**.
 
 ## Lightweight mode — process the request queue
 
-Read `add-conferences.txt`. **If it has no URL lines, stop now and make no
-commit.** Otherwise, for each URL line:
-- Fetch the page and extract the conference `name`, official `url`, `location`,
-  `start`/`end` dates, and paper/poster deadlines, following **"Entry format &
-  deadline rules"** below.
-- If it is already in `data/conferences.json` (match on name or URL,
-  case-insensitive) or its start date is already in the past, skip it.
-- Otherwise add a properly formatted entry (verify dates against the page; do
-  not invent).
+Read `add-conferences.txt`. Each non-blank line that does not start with `#` is a
+**request**, and is one of two kinds:
+- a **URL** (starts with `http://` or `https://`) — fetch the page.
+- a **free-text description** — e.g.
+  `Asilomar Repbase/Dfam retreat - Sept 13-16 at Asilomar (Monterey)`. Interpret
+  it: pull out the name, dates, and location it gives you, then **search the web
+  to find the official site** and confirm/complete the details (URL, exact dates,
+  deadlines). If no year is given, assume the next occurrence within the 12-month
+  window.
+
+**If there are no request lines, stop now and make no commit.** Otherwise, for
+each request line:
+- Extract the conference `name`, official `url`, `location`, `start`/`end` dates,
+  and paper/poster deadlines, following **"Entry format & deadline rules"** below.
+- Skip it if it is already in `data/conferences.json` (match on name or URL,
+  case-insensitive), if it matches an entry in `data/hidden.json` (the user
+  removed it on purpose — do not re-add), or if its start date is already past.
+- Otherwise add a properly formatted entry (verify dates against the real site;
+  do not invent).
 - **Remove every line you successfully handled** (added, or skipped as a
-  duplicate / past event) from `add-conferences.txt`.
-- If you cannot extract reliable info from a URL, leave that line in the file and
-  append `  # could not verify YYYY-MM-DD` so a human can look.
+  duplicate / hidden / past event) from `add-conferences.txt`.
+- If you cannot extract reliable info from a request, leave that line in the file
+  and append `  # could not verify YYYY-MM-DD` so a human can look.
 
 Then run `python3 scripts/prune.py` and finish. **Stop here** — do not re-verify
 other entries or run discovery.
@@ -52,10 +62,13 @@ other entries or run discovery.
    replacing estimates, newly announced deadlines (`"TBD"` → a real date),
    corrected locations or URLs, and deadlines that have `passed`. Remove any
    `(TBC)` / estimate wording once real dates are confirmed.
-2. Run `python3 scripts/prune.py` to drop conferences that have already ended.
+2. Run `python3 scripts/prune.py` to move conferences that have already ended
+   from `conferences.json` into `data/archive.json` (the site's Past section).
 3. Use web search to find conferences and workshops in the lab's topics whose
    **start date is within the next 12 months** and that are **not already in the
-   file** — work through the Watchlist below.
+   file** — work through the Watchlist below. **Never add anything that matches an
+   entry in `data/hidden.json`** (name or URL) — the user removed those on
+   purpose.
 4. Also process any URLs in `add-conferences.txt` exactly as in Lightweight
    mode, clearing the lines you handle.
 
@@ -91,14 +104,18 @@ De-duplicate on `name` (case-insensitive). **Do not invent dates** — if you
 can't verify a real date, skip the conference (or leave the existing value
 untouched). Better to omit an unverifiable conference than publish a wrong date.
 
-## Attendees file — leave it alone
+## User-maintained files — mostly leave them alone
 
-`data/attendees.json` maps a conference `name` to a list of lab members
-attending; it is maintained from the website's "+ Add" button, not by you.
-**Never overwrite or reformat it.** One exception: if you rename a conference in
-`conferences.json` (heavyweight mode), and that old name is a key in
-`attendees.json`, rename the key to match so the names stay attached. Otherwise
-do not touch this file.
+Two files are maintained from the website, not by you:
+
+- **`data/attendees.json`** maps a conference `name` to a list of lab members
+  attending. **Never overwrite or reformat it.** One exception: if you rename a
+  conference in `conferences.json` (heavyweight mode) and that old name is a key
+  here, rename the key to match so the names stay attached.
+- **`data/hidden.json`** lists conferences the user deliberately removed from the
+  page (each with `name`/`url`). **Never edit it, and never add a conference that
+  matches an entry in it** — in either mode. Treat a hidden match the same as a
+  duplicate: skip it.
 
 ## Finishing every run
 

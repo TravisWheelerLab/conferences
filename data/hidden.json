@@ -1,0 +1,4 @@
+{
+  "_readme": "Conferences manually removed from the page via the site's remove (✕) button. The website hides any conference whose name or url matches an entry here, and the discovery agent will not re-add them. To let one reappear, delete its entry from the list below.",
+  "hidden": []
+}

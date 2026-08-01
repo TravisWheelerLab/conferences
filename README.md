@@ -15,26 +15,41 @@ structural modeling.
 - **`index.html` / `app.js` / `style.css`** render the data as a static page.
   The page splits entries into *Upcoming* (end date ≥ today) and a collapsed
   *Past* section entirely in the browser — no build step.
-- **`scripts/prune.py`** removes entries whose `end` date has passed and
-  refreshes the `updated` field.
+- **`scripts/prune.py`** moves entries whose `end` date has passed out of
+  `conferences.json` and into **`data/archive.json`**, which the page loads for
+  its *Past conferences* section, and refreshes the `updated` field.
 
 ## Automation
 
-1. **Pruning** — `.github/workflows/prune.yml` runs `prune.py` weekly (Mondays)
-   and commits the result, so the site never shows finished meetings. It can
-   also be run on demand from the repo's **Actions** tab.
+1. **Archiving** — `.github/workflows/prune.yml` runs `prune.py` weekly (Mondays)
+   and commits the result, so the Upcoming list never shows finished meetings
+   (they move to `data/archive.json` for the Past section). It can also be run on
+   demand from the repo's **Actions** tab.
 2. **Discovery** — a scheduled Claude agent runs every two weeks, searches the
    web for new relevant conferences within the next ~12 months, adds them to
    `data/conferences.json` (de-duplicating on name), and commits directly. See
    `DISCOVERY_PROMPT.md` for the exact instructions it follows.
 
-## Adding a conference the easy way
+## Adding a conference
 
-Paste the conference's URL (one per line) into **`add-conferences.txt`** and
-commit. On its next run the discovery agent visits each URL, extracts the name,
-dates, location, and deadlines, adds it to `data/conferences.json`, and removes
-the line. To process immediately instead of waiting for the schedule, open the
-routine at https://claude.ai/code/routines and click **Run now**.
+Easiest: click **+ Add a conference** on the site. Paste a **URL** or type a
+**short description** (e.g. `Asilomar Repbase/Dfam retreat - Sept 13-16 at
+Asilomar (Monterey)`) — one per line, mix freely — and submit. Each line is
+appended to **`add-conferences.txt`**; on its next run (hourly) the discovery
+agent fetches URLs, interprets descriptions, verifies details against the real
+site, adds an entry to `data/conferences.json`, and removes the line. (The button
+uses the same GitHub token as attendees.)
+
+You can also edit `add-conferences.txt` directly and commit — same result. To
+process immediately instead of waiting, open the routine at
+https://claude.ai/code/routines and click **Run now**.
+
+## Removing a conference
+
+Click the **✕** at the end of a conference's row and confirm. Its name/URL is
+added to **`data/hidden.json`**; the page hides anything listed there, and the
+discovery agent won't re-add it. To bring it back, delete its entry from
+`data/hidden.json`.
 
 ## Adding attendees
 
