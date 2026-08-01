@@ -18,5 +18,5 @@
 #   at https://claude.ai/code/routines and click "Run now" after adding lines.
 
 # --- add URLs below this line ---
-Repbase/Dfam retreat - Sept 13-15 at Asilomar (Monterey)
-HPRC Annual Business Meeting ; September 9–11, 2026, in St. Louis, MO
+Repbase/Dfam retreat - Sept 13-15 at Asilomar (Monterey)  # could not verify 2026-08-01
+HPRC Annual Business Meeting ; September 9–11, 2026, in St. Louis, MO  # could not verify 2026-08-01
