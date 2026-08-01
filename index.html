@@ -27,6 +27,7 @@
             <th>Dates</th>
             <th>Paper deadline</th>
             <th>Poster deadline</th>
+            <th>Attending</th>
           </tr>
         </thead>
         <tbody></tbody>
@@ -56,7 +57,39 @@
       Data lives in <code>data/conferences.json</code>. Passed conferences are
       pruned automatically; new ones are added by a scheduled agent.
     </p>
+    <p>
+      Attendees live in <code>data/attendees.json</code>.
+      <a href="#" id="token-link">GitHub token&hellip;</a>
+    </p>
   </footer>
+
+  <!-- Token modal: lets a lab member store a GitHub token (in this browser only)
+       so the "+ Add" buttons can commit attendee changes to the repo. -->
+  <div id="token-modal" class="modal" hidden>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="token-title">
+      <h3 id="token-title">GitHub token</h3>
+      <p class="modal-help">
+        To add attendees from this page, paste a GitHub
+        <strong>fine-grained personal access token</strong> with
+        <strong>Contents: Read and write</strong> access to the
+        <code>TravisWheelerLab/conferences</code> repo. It is stored only in this
+        browser (localStorage) and is never sent anywhere except GitHub.
+      </p>
+      <p class="modal-help">
+        <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Create a token&nbsp;&rarr;</a>
+        (Resource owner: TravisWheelerLab · Repository access: this repo ·
+        Repository permissions &rarr; Contents: Read and write)
+      </p>
+      <input type="password" id="token-input" placeholder="github_pat_&hellip;" autocomplete="off" spellcheck="false" />
+      <p id="token-status" class="modal-status"></p>
+      <div class="modal-actions">
+        <button type="button" id="token-clear" class="btn-quiet">Clear stored token</button>
+        <span class="spacer"></span>
+        <button type="button" id="token-cancel" class="btn-quiet">Cancel</button>
+        <button type="button" id="token-save" class="btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>

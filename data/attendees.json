@@ -1,0 +1,4 @@
+{
+  "_readme": "Maps a conference name (exactly as it appears in data/conferences.json, matched case-insensitively) to a list of lab members attending. You normally don't edit this by hand: use the '+ Add' button on the website, which commits here for you. But hand-editing is fine too - keep it valid JSON.",
+  "attendees": {}
+}

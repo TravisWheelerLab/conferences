@@ -91,6 +91,15 @@ De-duplicate on `name` (case-insensitive). **Do not invent dates** — if you
 can't verify a real date, skip the conference (or leave the existing value
 untouched). Better to omit an unverifiable conference than publish a wrong date.
 
+## Attendees file — leave it alone
+
+`data/attendees.json` maps a conference `name` to a list of lab members
+attending; it is maintained from the website's "+ Add" button, not by you.
+**Never overwrite or reformat it.** One exception: if you rename a conference in
+`conferences.json` (heavyweight mode), and that old name is a key in
+`attendees.json`, rename the key to match so the names stay attached. Otherwise
+do not touch this file.
+
 ## Finishing every run
 
 Set the top-level `updated` field to today's date. Keep the file valid JSON,

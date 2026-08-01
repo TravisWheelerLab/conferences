@@ -36,6 +36,20 @@ dates, location, and deadlines, adds it to `data/conferences.json`, and removes
 the line. To process immediately instead of waiting for the schedule, open the
 routine at https://claude.ai/code/routines and click **Run now**.
 
+## Adding attendees
+
+The **Attending** column lists lab members going to each upcoming meeting. Add
+yourself right from the site: click **+ Add** in a conference's row, type a name,
+and Save. The change is committed to **`data/attendees.json`** and appears on the
+page within ~1 minute.
+
+The first time you add someone, the page asks for a GitHub **fine-grained
+personal access token** with *Contents: Read and write* on this repo. It is
+stored only in your browser (localStorage) and sent only to GitHub — never
+embedded in the page. Use the footer **GitHub token…** link to change or clear
+it. You can also edit `data/attendees.json` by hand (keys are conference names,
+matched case-insensitively).
+
 ## Editing by hand
 
 Add or correct an entry directly in `data/conferences.json` and commit. Keep
