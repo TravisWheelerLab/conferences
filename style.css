@@ -116,6 +116,8 @@ td a:hover { text-decoration: underline; }
   display: flex; align-items: center; justify-content: center;
   padding: 1rem;
 }
+/* `hidden` attribute must beat the display:flex above, or the modal never closes. */
+.modal[hidden] { display: none; }
 .modal-box {
   background: var(--bg); color: var(--fg);
   border: 1px solid var(--border); border-radius: 10px;
