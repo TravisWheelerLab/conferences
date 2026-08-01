@@ -13,4 +13,4 @@
 # - The website's per-row "Edit" button appends lines here for you.
 
 # --- add edit requests below this line ---
-Genome Informatics 2026 — deadline should be October 5, 2026
+
