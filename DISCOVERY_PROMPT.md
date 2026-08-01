@@ -32,27 +32,35 @@ with `#`. Both modes finish the same way — see **"Finishing every run"**.
 
 Read `add-conferences.txt`. Each non-blank line that does not start with `#` is a
 **request**, and is one of two kinds:
-- a **URL** (starts with `http://` or `https://`) — fetch the page.
+- a **URL** (starts with `http://` or `https://`) — fetch the page and extract
+  the details from it.
 - a **free-text description** — e.g.
-  `Asilomar Repbase/Dfam retreat - Sept 13-16 at Asilomar (Monterey)`. Interpret
-  it: pull out the name, dates, and location it gives you, then **search the web
-  to find the official site** and confirm/complete the details (URL, exact dates,
-  deadlines). If no year is given, assume the next occurrence within the 12-month
-  window.
+  `Asilomar Repbase/Dfam retreat - Sept 13-16 at Asilomar (Monterey)`. **This is
+  the user directly telling you the facts — treat what they wrote as
+  authoritative and sufficient to create an entry, even if there is no official
+  web page.** Pull out the name, dates, and location from the text. You MAY search
+  the web to fill in a URL and submission deadlines, but **a missing official URL
+  is NOT a reason to skip** — leave `url` as `""` and deadlines as `"TBD"`/`"N/A"`
+  if you can't find them. If no year is given, assume the next occurrence within
+  the 12-month window. Only decline a description that lacks the basics to form an
+  entry (no identifiable name, or no dates you can resolve to `start`/`end`).
 
 **If there are no request lines, stop now and make no commit.** Otherwise, for
 each request line:
-- Extract the conference `name`, official `url`, `location`, `start`/`end` dates,
-  and paper/poster deadlines, following **"Entry format & deadline rules"** below.
+- Extract the conference `name`, `url` (may be `""` for a hand-described event),
+  `location`, `start`/`end` dates, and paper/poster deadlines, following
+  **"Entry format & deadline rules"** below.
 - Skip it if it is already in `data/conferences.json` (match on name or URL,
   case-insensitive), if it matches an entry in `data/hidden.json` (the user
   removed it on purpose — do not re-add), or if its start date is already past.
-- Otherwise add a properly formatted entry (verify dates against the real site;
-  do not invent).
+- Otherwise add a properly formatted entry. For a **URL** request, verify the
+  dates against the page. For a **free-text** request, the user's stated dates are
+  the source — use them as given (don't discard the request just because you can't
+  find a corroborating page). Never fabricate details the user didn't provide.
 - **Remove every line you successfully handled** (added, or skipped as a
   duplicate / hidden / past event) from `add-conferences.txt`.
-- If you cannot extract reliable info from a request, leave that line in the file
-  and append `  # could not verify YYYY-MM-DD` so a human can look.
+- Only if a request is genuinely unusable (e.g. no resolvable dates) leave that
+  line in the file and append `  # could not verify YYYY-MM-DD` so a human can look.
 
 ### Edit requests
 
