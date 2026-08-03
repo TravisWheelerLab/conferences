@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-01",
+  "updated": "2026-08-03",
   "note": "Fields: name, url, location, start/end are ISO dates used for sorting and pruning; dates_display is the human-readable range. paper_deadline and poster_deadline are free text (a date, 'TBD', or 'passed').",
   "conferences": [
     {
@@ -30,7 +30,7 @@
       "end": "2026-09-02",
       "dates_display": "August 31 - September 2, 2026",
       "paper_deadline": "May 14, 2026 (passed)",
-      "poster_deadline": "TBD"
+      "poster_deadline": "April 20, 2026 (passed)"
     },
     {
       "name": "HPRC Annual Business Meeting 2026",
@@ -100,7 +100,7 @@
       "end": "2026-10-29",
       "dates_display": "October 24 - 29, 2026",
       "paper_deadline": "May 25, 2026 (ARR, passed)",
-      "poster_deadline": "August 2, 2026 (ARR commitment deadline)"
+      "poster_deadline": "August 2, 2026 (ARR commitment deadline, passed)"
     },
     {
       "name": "IEEE VIS 2026",
@@ -214,12 +214,12 @@
     },
     {
       "name": "ICLR 2027",
-      "url": "https://iclr.cc/Conferences/FutureMeetings",
-      "location": "Brazil (city TBD)",
-      "start": "2027-04-24",
-      "end": "2027-04-28",
-      "dates_display": "April 24 - 28, 2027",
-      "paper_deadline": "September 16, 2026",
+      "url": "https://iclr.cc/Conferences/2027",
+      "location": "West Coast, North America (city TBD)",
+      "start": "2027-04-26",
+      "end": "2027-04-30",
+      "dates_display": "April 26 - 30, 2027",
+      "paper_deadline": "September 25, 2026",
       "poster_deadline": "TBD"
     },
     {
