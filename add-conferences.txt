@@ -18,4 +18,4 @@
 #   at https://claude.ai/code/routines and click "Run now" after adding lines.
 
 # --- add URLs below this line ---
-https://cbp.asu.edu/content/biophest-workshops  # could not verify 2026-08-17 (cbp.asu.edu blocked by network proxy; unable to fetch page content)
+https://cbp.asu.edu/content/biophest-workshops  # could not verify 2026-08-18 (cbp.asu.edu blocked by network proxy; unable to fetch page content)
