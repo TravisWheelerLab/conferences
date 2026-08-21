@@ -19,3 +19,4 @@
 
 # --- add URLs below this line ---
 https://cbp.asu.edu/content/biophest-workshops  # could not verify 2026-08-21 (cbp.asu.edu blocked by network proxy; unable to fetch page content)
+https://meetings.cshl.edu/meetings.aspx?meet=data
