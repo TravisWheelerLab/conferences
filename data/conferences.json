@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-03",
+  "updated": "2026-08-21",
   "note": "Fields: name, url, location, start/end are ISO dates used for sorting and pruning; dates_display is the human-readable range. paper_deadline and poster_deadline are free text (a date, 'TBD', or 'passed').",
   "conferences": [
     {
@@ -101,6 +101,16 @@
       "dates_display": "October 24 - 29, 2026",
       "paper_deadline": "May 25, 2026 (ARR, passed)",
       "poster_deadline": "August 2, 2026 (ARR commitment deadline, passed)"
+    },
+    {
+      "name": "CSHL Biological Data Science 2026",
+      "url": "https://meetings.cshl.edu/meetings.aspx?meet=DATA",
+      "location": "Cold Spring Harbor Laboratory, Cold Spring Harbor, New York, USA",
+      "start": "2026-11-04",
+      "end": "2026-11-07",
+      "dates_display": "November 4 - 7, 2026",
+      "paper_deadline": "TBD",
+      "poster_deadline": "TBD"
     },
     {
       "name": "IEEE VIS 2026",
