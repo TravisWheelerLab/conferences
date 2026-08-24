@@ -33,6 +33,16 @@
       "poster_deadline": "April 20, 2026 (passed)"
     },
     {
+      "name": "ALGO 2026",
+      "url": "https://algo-conference.org/2026/",
+      "location": "L'Aquila, Italy",
+      "start": "2026-08-31",
+      "end": "2026-09-04",
+      "dates_display": "August 31 - September 4, 2026",
+      "paper_deadline": "varies by satellite (all passed)",
+      "poster_deadline": "N/A"
+    },
+    {
       "name": "HPRC Annual Business Meeting 2026",
       "url": "",
       "location": "St. Louis, MO",
@@ -60,7 +70,7 @@
       "end": "2026-09-17",
       "dates_display": "September 14 - 17, 2026",
       "paper_deadline": "May 17, 2026 (passed)",
-      "poster_deadline": "August 24, 2026 (abstracts)"
+      "poster_deadline": "August 24, 2026 (abstracts, passed)"
     },
     {
       "name": "CSHL Transposable Elements 2026",
@@ -179,7 +189,7 @@
       "start": "2027-01-03",
       "end": "2027-01-07",
       "dates_display": "January 3 - 7, 2027",
-      "paper_deadline": "August 3, 2026",
+      "paper_deadline": "August 3, 2026 (passed)",
       "poster_deadline": "December 1, 2026 (abstract)"
     },
     {
@@ -250,6 +260,16 @@
       "end": "2027-05-15",
       "dates_display": "May 11 - 15, 2027",
       "paper_deadline": "February 19, 2027 (abstracts)",
+      "poster_deadline": "TBD"
+    },
+    {
+      "name": "SMBE 2027",
+      "url": "https://smbe2027.org/",
+      "location": "Québec City Convention Centre, Québec City, Canada",
+      "start": "2027-06-20",
+      "end": "2027-06-24",
+      "dates_display": "June 20 - 24, 2027",
+      "paper_deadline": "N/A (abstract-only meeting)",
       "poster_deadline": "TBD"
     },
     {
