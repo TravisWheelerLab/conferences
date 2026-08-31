@@ -1,17 +1,7 @@
 {
-  "updated": "2026-08-24",
+  "updated": "2026-08-31",
   "note": "Fields: name, url, location, start/end are ISO dates used for sorting and pruning; dates_display is the human-readable range. paper_deadline and poster_deadline are free text (a date, 'TBD', or 'passed').",
   "conferences": [
-    {
-      "name": "Quest for Orthologs 9",
-      "url": "https://qfo2026.unil.ch/",
-      "location": "Lausanne, Switzerland",
-      "start": "2026-08-29",
-      "end": "2026-08-30",
-      "dates_display": "August 29 - 30, 2026",
-      "paper_deadline": "N/A",
-      "poster_deadline": "May 15, 2026 (passed)"
-    },
     {
       "name": "ECCB 2026",
       "url": "https://eccb2026.org/",
