@@ -119,7 +119,7 @@
       "start": "2026-11-04",
       "end": "2026-11-07",
       "dates_display": "November 4 - 7, 2026",
-      "paper_deadline": "TBD",
+      "paper_deadline": "August 5, 2026 (abstracts, passed)",
       "poster_deadline": "TBD"
     },
     {
@@ -170,7 +170,7 @@
       "end": "2026-12-12",
       "dates_display": "December 6 - 12, 2026",
       "paper_deadline": "May 6, 2026 (passed)",
-      "poster_deadline": "TBD"
+      "poster_deadline": "October 23, 2026 (camera-ready, accepted papers)"
     },
     {
       "name": "PSB 2027",
@@ -199,8 +199,8 @@
       "start": "2027-02-20",
       "end": "2027-02-24",
       "dates_display": "February 20 - 24, 2027",
-      "paper_deadline": "TBD",
-      "poster_deadline": "TBD"
+      "paper_deadline": "October 1, 2026 (early abstract)",
+      "poster_deadline": "January 5, 2027 (late abstract)"
     },
     {
       "name": "CSHL Network Biology 2027",
@@ -239,8 +239,8 @@
       "start": "2027-04-26",
       "end": "2027-04-30",
       "dates_display": "April 26 - 30, 2027",
-      "paper_deadline": "September 25, 2026",
-      "poster_deadline": "TBD"
+      "paper_deadline": "September 25, 2026 (abstract registration: September 18, 2026)",
+      "poster_deadline": "N/A"
     },
     {
       "name": "CSHL Biology of Genomes 2027",
@@ -260,7 +260,7 @@
       "end": "2027-06-24",
       "dates_display": "June 20 - 24, 2027",
       "paper_deadline": "N/A (abstract-only meeting)",
-      "poster_deadline": "TBD"
+      "poster_deadline": "February 1, 2027 (abstracts)"
     },
     {
       "name": "Protein Society 41st Annual Symposium (PS41)",
@@ -274,13 +274,23 @@
     },
     {
       "name": "ISMB/ECCB 2027",
-      "url": "https://www.iscb.org/conferences-events/about-ismb",
+      "url": "https://www.iscb.org/ismbeccb2027/home",
       "location": "Copenhagen, Denmark",
       "start": "2027-07-18",
       "end": "2027-07-22",
       "dates_display": "July 18 - 22, 2027",
       "paper_deadline": "TBD",
       "poster_deadline": "TBD"
+    },
+    {
+      "name": "SEA 2027",
+      "url": "https://sea2027.iti.kit.edu/",
+      "location": "Karlsruhe Institute of Technology, Karlsruhe, Germany",
+      "start": "2027-07-21",
+      "end": "2027-07-23",
+      "dates_display": "July 21 - 23, 2027",
+      "paper_deadline": "TBD",
+      "poster_deadline": "N/A"
     }
   ]
 }
