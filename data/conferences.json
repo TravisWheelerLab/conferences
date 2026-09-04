@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-31",
+  "updated": "2026-09-04",
   "note": "Fields: name, url, location, start/end are ISO dates used for sorting and pruning; dates_display is the human-readable range. paper_deadline and poster_deadline are free text (a date, 'TBD', or 'passed').",
   "conferences": [
     {
@@ -11,16 +11,6 @@
       "dates_display": "August 31 - September 4, 2026",
       "paper_deadline": "March 16, 2026 (passed)",
       "poster_deadline": "April 30, 2026 (passed)"
-    },
-    {
-      "name": "WABI 2026",
-      "url": "https://algo-conference.org/2026/wabi/",
-      "location": "L'Aquila, Italy",
-      "start": "2026-08-31",
-      "end": "2026-09-02",
-      "dates_display": "August 31 - September 2, 2026",
-      "paper_deadline": "May 14, 2026 (passed)",
-      "poster_deadline": "April 20, 2026 (passed)"
     },
     {
       "name": "ALGO 2026",

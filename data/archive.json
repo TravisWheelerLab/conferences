@@ -2,6 +2,16 @@
   "_readme": "Conferences that have ended, moved here by scripts/prune.py so the site's 'Past conferences' section keeps a history. Newest first.",
   "conferences": [
     {
+      "name": "WABI 2026",
+      "url": "https://algo-conference.org/2026/wabi/",
+      "location": "L'Aquila, Italy",
+      "start": "2026-08-31",
+      "end": "2026-09-02",
+      "dates_display": "August 31 - September 2, 2026",
+      "paper_deadline": "May 14, 2026 (passed)",
+      "poster_deadline": "April 20, 2026 (passed)"
+    },
+    {
       "name": "Quest for Orthologs 9",
       "url": "https://qfo2026.unil.ch/",
       "location": "Lausanne, Switzerland",

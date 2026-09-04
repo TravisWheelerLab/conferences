@@ -18,4 +18,3 @@
 #   at https://claude.ai/code/routines and click "Run now" after adding lines.
 
 # --- add URLs below this line ---
-https://www.keystonesymposia.org/conferences/conference-listing/meeting/C22027
