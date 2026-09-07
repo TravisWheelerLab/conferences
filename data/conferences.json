@@ -1,27 +1,7 @@
 {
-  "updated": "2026-09-04",
+  "updated": "2026-09-07",
   "note": "Fields: name, url, location, start/end are ISO dates used for sorting and pruning; dates_display is the human-readable range. paper_deadline and poster_deadline are free text (a date, 'TBD', or 'passed').",
   "conferences": [
-    {
-      "name": "ECCB 2026",
-      "url": "https://eccb2026.org/",
-      "location": "Geneva, Switzerland",
-      "start": "2026-08-31",
-      "end": "2026-09-04",
-      "dates_display": "August 31 - September 4, 2026",
-      "paper_deadline": "March 16, 2026 (passed)",
-      "poster_deadline": "April 30, 2026 (passed)"
-    },
-    {
-      "name": "ALGO 2026",
-      "url": "https://algo-conference.org/2026/",
-      "location": "L'Aquila, Italy",
-      "start": "2026-08-31",
-      "end": "2026-09-04",
-      "dates_display": "August 31 - September 4, 2026",
-      "paper_deadline": "varies by satellite (all passed)",
-      "poster_deadline": "N/A"
-    },
     {
       "name": "HPRC Annual Business Meeting 2026",
       "url": "",
