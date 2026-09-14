@@ -1,17 +1,7 @@
 {
-  "updated": "2026-09-07",
+  "updated": "2026-09-14",
   "note": "Fields: name, url, location, start/end are ISO dates used for sorting and pruning; dates_display is the human-readable range. paper_deadline and poster_deadline are free text (a date, 'TBD', or 'passed').",
   "conferences": [
-    {
-      "name": "HPRC Annual Business Meeting 2026",
-      "url": "",
-      "location": "St. Louis, MO",
-      "start": "2026-09-09",
-      "end": "2026-09-11",
-      "dates_display": "September 9 - 11, 2026",
-      "paper_deadline": "N/A",
-      "poster_deadline": "N/A"
-    },
     {
       "name": "Repbase/Dfam Retreat 2026",
       "url": "",
