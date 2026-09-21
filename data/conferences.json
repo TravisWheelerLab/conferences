@@ -1,27 +1,7 @@
 {
-  "updated": "2026-09-15",
+  "updated": "2026-09-21",
   "note": "Fields: name, url, location, start/end are ISO dates used for sorting and pruning; dates_display is the human-readable range. paper_deadline and poster_deadline are free text (a date, 'TBD', or 'passed').",
   "conferences": [
-    {
-      "name": "Repbase/Dfam Retreat 2026",
-      "url": "",
-      "location": "Asilomar, Monterey, CA",
-      "start": "2026-09-13",
-      "end": "2026-09-15",
-      "dates_display": "September 13 - 15, 2026",
-      "paper_deadline": "N/A",
-      "poster_deadline": "N/A"
-    },
-    {
-      "name": "InCoB/ISCB-APAC 2026",
-      "url": "https://incob.apbionet.org/incob2026/",
-      "location": "Penang, Malaysia",
-      "start": "2026-09-14",
-      "end": "2026-09-17",
-      "dates_display": "September 14 - 17, 2026",
-      "paper_deadline": "May 17, 2026 (passed)",
-      "poster_deadline": "August 24, 2026 (abstracts, passed)"
-    },
     {
       "name": "CSHL Transposable Elements 2026",
       "url": "https://meetings.cshl.edu/meetings.aspx?meet=TRANSPOSE",
