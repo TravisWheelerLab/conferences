@@ -40,7 +40,7 @@
       "end": "2026-10-24",
       "dates_display": "October 21 - 24, 2026",
       "paper_deadline": "July 17, 2026 (extended, passed)",
-      "poster_deadline": "September 15, 2026 (abstracts)"
+      "poster_deadline": "September 15, 2026 (abstracts, passed)"
     },
     {
       "name": "EMNLP 2026",
@@ -179,7 +179,7 @@
       "start": "2027-04-26",
       "end": "2027-04-30",
       "dates_display": "April 26 - 30, 2027",
-      "paper_deadline": "September 25, 2026 (abstract registration: September 18, 2026)",
+      "paper_deadline": "September 25, 2026 (abstract registration: September 18, 2026, passed)",
       "poster_deadline": "N/A"
     },
     {
@@ -190,6 +190,26 @@
       "end": "2027-05-15",
       "dates_display": "May 11 - 15, 2027",
       "paper_deadline": "February 19, 2027 (abstracts)",
+      "poster_deadline": "TBD"
+    },
+    {
+      "name": "RECOMB 2027",
+      "url": "https://recomb.org/recomb2027/",
+      "location": "Toronto, Canada",
+      "start": "2027-05-17",
+      "end": "2027-05-20",
+      "dates_display": "May 17 - 20, 2027",
+      "paper_deadline": "TBD",
+      "poster_deadline": "TBD"
+    },
+    {
+      "name": "GLBIO 2027",
+      "url": "https://www.iscb.org/glbio2027",
+      "location": "Grand Rapids, Michigan, USA",
+      "start": "2027-05-24",
+      "end": "2027-05-27",
+      "dates_display": "May 24 - 27, 2027",
+      "paper_deadline": "TBD",
       "poster_deadline": "TBD"
     },
     {
