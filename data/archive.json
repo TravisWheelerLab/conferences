@@ -2,6 +2,16 @@
   "_readme": "Conferences that have ended, moved here by scripts/prune.py so the site's 'Past conferences' section keeps a history. Newest first.",
   "conferences": [
     {
+      "name": "CSHL Transposable Elements 2026",
+      "url": "https://meetings.cshl.edu/meetings.aspx?meet=TRANSPOSE",
+      "location": "Cold Spring Harbor, New York, USA",
+      "start": "2026-09-29",
+      "end": "2026-10-03",
+      "dates_display": "September 29 - October 3, 2026",
+      "paper_deadline": "N/A",
+      "poster_deadline": "TBD"
+    },
+    {
       "name": "InCoB/ISCB-APAC 2026",
       "url": "https://incob.apbionet.org/incob2026/",
       "location": "Penang, Malaysia",
