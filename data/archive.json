@@ -2,6 +2,16 @@
   "_readme": "Conferences that have ended, moved here by scripts/prune.py so the site's 'Past conferences' section keeps a history. Newest first.",
   "conferences": [
     {
+      "name": "Statistical Physics in Biology: 20 Year CBP Anniversary",
+      "url": "https://cbp.asu.edu/content/biophest-workshops",
+      "location": "Arizona State University, Tempe, Arizona, USA",
+      "start": "2026-10-10",
+      "end": "2026-10-15",
+      "dates_display": "October 10 - 15, 2026",
+      "paper_deadline": "TBD",
+      "poster_deadline": "TBD"
+    },
+    {
       "name": "CSHL Transposable Elements 2026",
       "url": "https://meetings.cshl.edu/meetings.aspx?meet=TRANSPOSE",
       "location": "Cold Spring Harbor, New York, USA",
