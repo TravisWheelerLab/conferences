@@ -2,6 +2,26 @@
   "_readme": "Conferences that have ended, moved here by scripts/prune.py so the site's 'Past conferences' section keeps a history. Newest first.",
   "conferences": [
     {
+      "name": "APBC 2026",
+      "url": "https://www.apbc2026.com/",
+      "location": "Hsinchu, Taiwan",
+      "start": "2026-10-21",
+      "end": "2026-10-24",
+      "dates_display": "October 21 - 24, 2026",
+      "paper_deadline": "July 17, 2026 (extended, passed)",
+      "poster_deadline": "September 15, 2026 (abstracts, passed)"
+    },
+    {
+      "name": "ASHG 2026",
+      "url": "https://ashgmeeting.ashg.org/",
+      "location": "Montreal, Quebec, Canada",
+      "start": "2026-10-20",
+      "end": "2026-10-24",
+      "dates_display": "October 20 - 24, 2026",
+      "paper_deadline": "N/A",
+      "poster_deadline": "May 18, 2026 (passed); late-breaking: Aug 10–26, 2026 (passed)"
+    },
+    {
       "name": "Statistical Physics in Biology: 20 Year CBP Anniversary",
       "url": "https://cbp.asu.edu/content/biophest-workshops",
       "location": "Arizona State University, Tempe, Arizona, USA",
