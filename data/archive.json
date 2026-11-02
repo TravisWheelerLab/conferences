@@ -2,6 +2,16 @@
   "_readme": "Conferences that have ended, moved here by scripts/prune.py so the site's 'Past conferences' section keeps a history. Newest first.",
   "conferences": [
     {
+      "name": "EMNLP 2026",
+      "url": "https://2026.emnlp.org/",
+      "location": "Budapest, Hungary",
+      "start": "2026-10-24",
+      "end": "2026-10-29",
+      "dates_display": "October 24 - 29, 2026",
+      "paper_deadline": "May 25, 2026 (ARR, passed)",
+      "poster_deadline": "August 2, 2026 (ARR commitment deadline, passed)"
+    },
+    {
       "name": "APBC 2026",
       "url": "https://www.apbc2026.com/",
       "location": "Hsinchu, Taiwan",

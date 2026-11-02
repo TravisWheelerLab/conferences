@@ -1,17 +1,7 @@
 {
-  "updated": "2026-10-26",
+  "updated": "2026-11-02",
   "note": "Fields: name, url, location, start/end are ISO dates used for sorting and pruning; dates_display is the human-readable range. paper_deadline and poster_deadline are free text (a date, 'TBD', or 'passed').",
   "conferences": [
-    {
-      "name": "EMNLP 2026",
-      "url": "https://2026.emnlp.org/",
-      "location": "Budapest, Hungary",
-      "start": "2026-10-24",
-      "end": "2026-10-29",
-      "dates_display": "October 24 - 29, 2026",
-      "paper_deadline": "May 25, 2026 (ARR, passed)",
-      "poster_deadline": "August 2, 2026 (ARR commitment deadline, passed)"
-    },
     {
       "name": "CSHL Biological Data Science 2026",
       "url": "https://meetings.cshl.edu/meetings.aspx?meet=DATA",
