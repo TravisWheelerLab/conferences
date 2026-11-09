@@ -2,6 +2,16 @@
   "_readme": "Conferences that have ended, moved here by scripts/prune.py so the site's 'Past conferences' section keeps a history. Newest first.",
   "conferences": [
     {
+      "name": "CSHL Biological Data Science 2026",
+      "url": "https://meetings.cshl.edu/meetings.aspx?meet=DATA",
+      "location": "Cold Spring Harbor Laboratory, Cold Spring Harbor, New York, USA",
+      "start": "2026-11-04",
+      "end": "2026-11-07",
+      "dates_display": "November 4 - 7, 2026",
+      "paper_deadline": "August 5, 2026 (abstracts, passed)",
+      "poster_deadline": "TBD"
+    },
+    {
       "name": "EMNLP 2026",
       "url": "https://2026.emnlp.org/",
       "location": "Budapest, Hungary",
