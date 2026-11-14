@@ -18,3 +18,4 @@
 #   at https://claude.ai/code/routines and click "Run now" after adding lines.
 
 # --- add URLs below this line ---
+I want you to add CompBioAsia.  There is no website. June 6-19 at VinUni in Hanoi Vietnam on the VinUni campus
