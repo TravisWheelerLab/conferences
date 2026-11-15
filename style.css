@@ -59,7 +59,17 @@ thead th {
   color: var(--muted);
 }
 
-tbody tr:nth-child(even) { background: var(--row-alt); }
+/* Upcoming rows can be filtered out, so app.js sets .alt on every other
+   visible row instead of relying on :nth-child. */
+#past-table tbody tr:nth-child(even),
+#upcoming-table tbody tr.alt { background: var(--row-alt); }
+#upcoming-table.only-attending tbody tr:not(.has-attendees) { display: none; }
+
+.section-tools { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.filter-toggle {
+  display: inline-flex; align-items: center; gap: .4rem;
+  font-size: .9rem; color: var(--muted); cursor: pointer;
+}
 
 td a { color: var(--accent); text-decoration: none; font-weight: 600; }
 td a:hover { text-decoration: underline; }

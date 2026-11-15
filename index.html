@@ -20,7 +20,13 @@
     <section>
       <div class="section-head">
         <h2>Upcoming</h2>
-        <button type="button" id="add-conf-btn" class="btn-primary">+ Add a conference</button>
+        <div class="section-tools">
+          <label class="filter-toggle">
+            <input type="checkbox" id="only-attending" />
+            Only ones someone is attending
+          </label>
+          <button type="button" id="add-conf-btn" class="btn-primary">+ Add a conference</button>
+        </div>
       </div>
       <table id="upcoming-table">
         <thead>
@@ -37,6 +43,7 @@
         <tbody></tbody>
       </table>
       <p id="empty-msg" class="empty" hidden>No upcoming conferences on file.</p>
+      <p id="filter-empty-msg" class="empty" hidden>No one is listed as attending an upcoming conference yet.</p>
     </section>
 
     <section>

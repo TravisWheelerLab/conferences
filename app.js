@@ -190,6 +190,8 @@ function attendeesCell(conf, attendeeMap) {
         );
         const key = existingKey || conf.name;
         attendeeMap[key] = (attendeeMap[key] || []).concat(added);
+        td.closest("tr").classList.add("has-attendees");
+        applyAttendingFilter();
         const n = added.length;
         showStatus(`Saved ${n} name${n === 1 ? "" : "s"} — live within ~1 min.`, false);
         done();
@@ -268,6 +270,7 @@ function actionsCell(conf, tr) {
       tr.remove();
       g.upcomingCount = Math.max(0, g.upcomingCount - 1);
       refreshUpcomingCount();
+      applyAttendingFilter();
     } catch (err) {
       console.error(err);
       td.textContent = "";
@@ -646,6 +649,45 @@ function wireEditModal() {
   });
 }
 
+// ---- "Only ones someone is attending" filter ------------------------------
+
+const FILTER_KEY = "conf_only_attending";
+
+// Shows or hides upcoming rows with no attendees, re-stripes the visible rows,
+// and shows a note when the filter leaves nothing to show.
+function applyAttendingFilter() {
+  const box = document.getElementById("only-attending");
+  const table = document.getElementById("upcoming-table");
+  const on = box.checked;
+  table.classList.toggle("only-attending", on);
+
+  let visible = 0;
+  for (const tr of table.tBodies[0].rows) {
+    const shown = !on || tr.classList.contains("has-attendees");
+    tr.classList.toggle("alt", shown && visible % 2 === 1);
+    if (shown) visible++;
+  }
+  const hasRows = table.tBodies[0].rows.length > 0;
+  document.getElementById("filter-empty-msg").hidden = !(on && hasRows && visible === 0);
+}
+
+function wireAttendingFilter() {
+  const box = document.getElementById("only-attending");
+  try {
+    box.checked = localStorage.getItem(FILTER_KEY) === "1";
+  } catch {
+    // Storage blocked; the box just starts unchecked.
+  }
+  box.addEventListener("change", () => {
+    try {
+      localStorage.setItem(FILTER_KEY, box.checked ? "1" : "0");
+    } catch {
+      // Not remembered across visits, but the filter still works.
+    }
+    applyAttendingFilter();
+  });
+}
+
 // ---- Rendering ------------------------------------------------------------
 
 function renderUpcoming(list, today, attendeeMap) {
@@ -661,6 +703,7 @@ function renderUpcoming(list, today, attendeeMap) {
 
   for (const conf of list) {
     const tr = el("tr");
+    if (attendeesFor(attendeeMap, conf.name).length > 0) tr.classList.add("has-attendees");
     tr.appendChild(nameCell(conf));
     tr.appendChild(el("td", { text: conf.location || "" }));
 
@@ -701,6 +744,7 @@ async function main() {
   wireTokenModal();
   wireAddModal();
   wireEditModal();
+  wireAttendingFilter();
 
   let data;
   try {
@@ -767,6 +811,7 @@ async function main() {
 
   renderUpcoming(upcoming, today, attendeeMap);
   renderPast(past);
+  applyAttendingFilter();
 }
 
 main();
