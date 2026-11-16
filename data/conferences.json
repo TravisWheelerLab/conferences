@@ -1,17 +1,7 @@
 {
-  "updated": "2026-11-09",
+  "updated": "2026-11-16",
   "note": "Fields: name, url, location, start/end are ISO dates used for sorting and pruning; dates_display is the human-readable range. paper_deadline and poster_deadline are free text (a date, 'TBD', or 'passed').",
   "conferences": [
-    {
-      "name": "IEEE VIS 2026",
-      "url": "https://ieeevis.org/year/2026/welcome/",
-      "location": "Boston, Massachusetts, USA",
-      "start": "2026-11-09",
-      "end": "2026-11-13",
-      "dates_display": "November 9 - 13, 2026",
-      "paper_deadline": "March 21, 2026 (passed)",
-      "poster_deadline": "June 24, 2026 (passed)"
-    },
     {
       "name": "MLCB 2026",
       "url": "https://www.mlcb.org/",

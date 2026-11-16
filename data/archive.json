@@ -2,6 +2,16 @@
   "_readme": "Conferences that have ended, moved here by scripts/prune.py so the site's 'Past conferences' section keeps a history. Newest first.",
   "conferences": [
     {
+      "name": "IEEE VIS 2026",
+      "url": "https://ieeevis.org/year/2026/welcome/",
+      "location": "Boston, Massachusetts, USA",
+      "start": "2026-11-09",
+      "end": "2026-11-13",
+      "dates_display": "November 9 - 13, 2026",
+      "paper_deadline": "March 21, 2026 (passed)",
+      "poster_deadline": "June 24, 2026 (passed)"
+    },
+    {
       "name": "CSHL Biological Data Science 2026",
       "url": "https://meetings.cshl.edu/meetings.aspx?meet=DATA",
       "location": "Cold Spring Harbor Laboratory, Cold Spring Harbor, New York, USA",
