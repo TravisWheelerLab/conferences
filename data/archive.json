@@ -2,6 +2,16 @@
   "_readme": "Conferences that have ended, moved here by scripts/prune.py so the site's 'Past conferences' section keeps a history. Newest first.",
   "conferences": [
     {
+      "name": "MLCB 2026",
+      "url": "https://www.mlcb.org/",
+      "location": "New York Genome Center, NYC, USA",
+      "start": "2026-11-16",
+      "end": "2026-11-17",
+      "dates_display": "November 16 - 17, 2026",
+      "paper_deadline": "July 3, 2026 (passed)",
+      "poster_deadline": "July 3, 2026 (passed)"
+    },
+    {
       "name": "IEEE VIS 2026",
       "url": "https://ieeevis.org/year/2026/welcome/",
       "location": "Boston, Massachusetts, USA",

@@ -1,17 +1,7 @@
 {
-  "updated": "2026-11-16",
+  "updated": "2026-11-23",
   "note": "Fields: name, url, location, start/end are ISO dates used for sorting and pruning; dates_display is the human-readable range. paper_deadline and poster_deadline are free text (a date, 'TBD', or 'passed').",
   "conferences": [
-    {
-      "name": "MLCB 2026",
-      "url": "https://www.mlcb.org/",
-      "location": "New York Genome Center, NYC, USA",
-      "start": "2026-11-16",
-      "end": "2026-11-17",
-      "dates_display": "November 16 - 17, 2026",
-      "paper_deadline": "July 3, 2026 (passed)",
-      "poster_deadline": "July 3, 2026 (passed)"
-    },
     {
       "name": "IEEE BIBM 2026",
       "url": "https://www3.cs.stonybrook.edu/~bibm2026/home.html",
